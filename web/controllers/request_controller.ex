@@ -29,11 +29,6 @@ defmodule Requestbox.RequestController do
       "body": get_body(conn, "")
     })
 
-    # changeset = Ecto.Changeset.put_change(changeset, :headers,
-    #   headers
-    #   # |> Poison.encode!
-    # )
-    # IO.inspect(changeset.changes)
     case Repo.insert(changeset) do
       {:ok, request} ->
         conn

@@ -1,19 +1,19 @@
-# Requestbox
+# RequestBox
 
-To start your Phoenix app:
+RequestBox allows you to register endpoints that will record and capture HTTP
+requests similar to [RequestBin](http://requestb.in/).  It's useful for
+debugging webhooks and other API clients.
 
-  1. Install dependencies with `mix deps.get`
-  2. Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  3. Start Phoenix endpoint with `mix phoenix.server`
+## Installation
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+    git clone https://github.com/kevinastone/requestbox.git
+    cd requestbox
+    mix deps.get
+    npm install
+    mix ecto.create && mix ecto.migrate
+    mix phoenix.server
+    open http://localhost:4000
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+## Screenshot
 
-## Learn more
-
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: http://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+![screenshot](https://raw.github.com/kevinastone/requestbox/master/web/static/assets/images/screenshot.png)
