@@ -7,16 +7,15 @@
   </div>
 </form>
 
-<%= if hd @session.requests do %>
-  <h2>Requests</h2>
-  <%= for request <- @session.requests do %>
-    <%= render "request.html", request: request %>
-  <% end %>
-
-<% else %>
-
-  <p>Make a request to get started. After making a request, You will see this page update live.</p>
-  <h3>cURL</h3>
-  <pre><code>curl -X POST -d "fizz=buzz" <%= api_request_url(@conn, :capture, @session.id) %></code></pre>
+<%= case @session.requests do %>
+  <%= requests when hd @session.requests -> %>
+    <h2>Requests</h2>
+    <%= for request <- requests do %>
+      <%= render "request.html", request: request %>
+    <% end %>
+  <%= _requests -> %>
+    <p>Make a request to get started. After making a request, You will see this page update live.</p>
+    <h3>cURL</h3>
+    <pre><code>curl -X POST -d "fizz=buzz" <%= api_request_url(@conn, :capture, @session.id) %></code></pre>
 
 <% end %>
