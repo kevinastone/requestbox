@@ -31,3 +31,6 @@ config :phoenix, :generators,
 config :quantum, cron: [
   "@hourly": {Requestbox.Session, :cleanup}
 ]
+
+config :hashids,
+  salt: "DtALrFb9ZQAghcOrxeE1azn6y5kf3OuZ"

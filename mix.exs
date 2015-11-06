@@ -39,7 +39,8 @@ defmodule Requestbox.Mixfile do
      {:cowboy, "~> 1.0"},
      {:quantum, ">= 1.5.0"},
      {:poison, "~> 1.5"},
-     {:timex_ecto, "~> 0.5.0"}
+     {:timex_ecto, "~> 0.5.0"},
+     {:hashids, "~> 2.0"}
    ]
   end
 

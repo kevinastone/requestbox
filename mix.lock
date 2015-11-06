@@ -6,6 +6,7 @@
   "ecto": {:hex, :ecto, "1.0.6"},
   "esqlite": {:hex, :esqlite, "0.2.1"},
   "hackney": {:hex, :hackney, "1.4.4"},
+  "hashids": {:hex, :hashids, "2.0.0"},
   "idna": {:hex, :idna, "1.0.2"},
   "mimerl": {:hex, :mimerl, "1.0.0"},
   "phoenix": {:hex, :phoenix, "1.0.3"},

@@ -6,16 +6,16 @@ defmodule Requestbox.ErrorViewTest do
 
   test "renders 404.json" do
     assert render(Requestbox.ErrorView, "404.json", []) ==
-           %{"errors" => %{"detail" => "Page not found"}}
+           %{errors: %{detail: "Page not found"}}
   end
 
   test "render 500.json" do
     assert render(Requestbox.ErrorView, "500.json", []) ==
-           %{"errors" => %{"detail" => "Server internal error"}}
+           %{errors: %{detail: "Server internal error"}}
   end
 
   test "render any other" do
     assert render(Requestbox.ErrorView, "505.json", []) ==
-           %{"errors" => %{"detail" => "Server internal error"}}
+           %{errors: %{detail: "Server internal error"}}
   end
 end
