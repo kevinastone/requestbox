@@ -11,6 +11,7 @@
   "poison": {:hex, :poison, "1.5.0"},
   "poolboy": {:hex, :poolboy, "1.5.1"},
   "postgrex": {:hex, :postgrex, "0.9.1"},
+  "quantum": {:hex, :quantum, "1.5.0"},
   "ranch": {:hex, :ranch, "1.1.0"},
   "sqlite_ecto": {:hex, :sqlite_ecto, "1.0.2"},
   "sqlitex": {:hex, :sqlitex, "0.8.2"}}

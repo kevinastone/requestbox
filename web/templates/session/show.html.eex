@@ -2,13 +2,21 @@
   <div class="form-group">
     <label for="sessionUrl" class="col-sm-2 control-label">Bin URL</label>
     <div class="col-sm-10">
-      <input id="sessionUrl" class="form-control" type="text" value="<%= root_session_url(@conn, :show, @session.id) %>" onfocus="setTimeout(function() {select();})"></h2>
+      <input id="sessionUrl" class="form-control" type="text" value="<%= api_request_url(@conn, :capture, @session.id) %>" onfocus="setTimeout(function() {select();})"></h2>
     </div>
   </div>
 </form>
-<p>
-Make a request to get started. After making a request, refresh this page to see it.
-</p>
 
-<h3>cURL</h3>
-<pre><code>curl -X POST -d "fizz=buzz" <%= root_session_url(@conn, :show, @session.id) %></code></pre>
+<%= if hd @session.requests do %>
+  <h2>Requests</h2>
+  <%= for request <- @session.requests do %>
+    <%= render "request.html", request: request %>
+  <% end %>
+
+<% else %>
+
+  <p>Make a request to get started. After making a request, You will see this page update live.</p>
+  <h3>cURL</h3>
+  <pre><code>curl -X POST -d "fizz=buzz" <%= api_request_url(@conn, :capture, @session.id) %></code></pre>
+
+<% end %>

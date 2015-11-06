@@ -18,8 +18,8 @@ defmodule Phoenixbin.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Phoenixbin, []},
-     applications: [:phoenix, :cowboy, :logger, :phoenix_html,
-                    :phoenix_ecto, :postgrex, :sqlite_ecto]]
+     applications: [:phoenix, :cowboy, :logger, :quantum,
+                    :phoenix_html, :phoenix_ecto, :postgrex, :sqlite_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -35,7 +35,10 @@ defmodule Phoenixbin.Mixfile do
      {:phoenix_ecto, "~> 1.1"},
      {:postgrex, ">= 0.0.0"},
      {:sqlite_ecto, "~> 1.0.0"},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:quantum, ">= 1.5.0"},
+     {:poison, "~> 1.5"}
+   ]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

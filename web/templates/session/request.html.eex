@@ -1,0 +1,62 @@
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="timestamp" class="col-sm-2 control-label">Timestamp</label>
+    <div class="col-sm-10">
+      <%= @request.inserted_at %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="method" class="col-sm-2 control-label">Method</label>
+    <div class="col-sm-10">
+      <%= @request.method %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="method" class="col-sm-2 control-label">Path</label>
+    <div class="col-sm-10">
+      <%= @request.path %>
+    </div>
+  </div>
+  <%= if @request.client_ip do %>
+  <div class="form-group">
+    <label for="method" class="col-sm-2 control-label">Client IP</label>
+    <div class="col-sm-10">
+      <%= @request.client_ip %>
+    </div>
+  </div>
+  <% end %>
+  <%= if String.first(@request.query_string) do %>
+  <div class="form-group">
+    <label for="queryString" class="col-sm-2 control-label">Query String</label>
+    <div class="col-sm-10">
+      <pre><code><%= @request.query_string %></code></pre>
+    </div>
+    <label for="queryParts" class="col-sm-2 control-label">Query Params</label>
+    <div class="col-sm-10">
+      <%= for {key, value} <- URI.query_decoder(@request.query_string) do %>
+        <pre><code><%= key %> = <%= value %></code></pre>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+
+  <%= if hd @request.headers do %>
+  <div class="form-group">
+    <label for="queryParts" class="col-sm-2 control-label">Headers</label>
+    <div class="col-sm-10">
+    <%= for header <- @request.headers do %>
+      <pre><code><%= header.name %>: <%= header.value %></code></pre>
+    <% end %>
+    </div>
+  </div>
+  <% end %>
+
+  <%= if String.first(@request.body) do %>
+  <div class="form-group">
+    <label for="body" class="col-sm-2 control-label">Body</label>
+    <div class="col-sm-10">
+      <pre><code><%= @request.body %></code></pre>
+    </div>
+  </div>
+  <% end %>
+</form>

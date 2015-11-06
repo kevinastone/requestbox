@@ -4,11 +4,12 @@ defmodule Phoenixbin.Session do
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "sessions" do
 
+    has_many :requests, Phoenixbin.Request, on_delete: :delete_all
     timestamps
   end
 
   @required_fields ~w()
-  @optional_fields ~w()
+  @optional_fields ~w(requests)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -21,7 +22,7 @@ defmodule Phoenixbin.Session do
     |> cast(params, @required_fields, @optional_fields)
   end
 
-  def valid? do
-    true
+  def cleanup() do
+
   end
 end

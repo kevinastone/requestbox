@@ -10,7 +10,7 @@ defmodule Phoenixbin.Router do
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    # plug :accepts, ["json"]
   end
 
   scope "/", Phoenixbin, as: :root do
@@ -19,7 +19,14 @@ defmodule Phoenixbin.Router do
     resources "/", SessionController, only: [:index, :create, :show]
   end
 
-  # scope "/api", Phoenixbin do
-  #   pipe_through :api
-  # end
+  scope "/api", Phoenixbin, as: :api do
+    pipe_through :api
+
+    get "/:session_id", RequestController, :capture
+    post "/:session_id", RequestController, :capture
+    patch "/:session_id", RequestController, :capture
+    put "/:session_id", RequestController, :capture
+    delete "/:session_id", RequestController, :capture
+    head "/:session_id", RequestController, :capture
+  end
 end
