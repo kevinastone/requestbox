@@ -13,13 +13,13 @@ defmodule Phoenixbin.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Phoenixbin do
+  scope "/", Phoenixbin, as: :root do
     pipe_through :browser
 
-    get "/", RootController, :index
+    resources "/", SessionController, only: [:index, :create, :show]
   end
 
-  scope "/api", Phoenixbin do
-    pipe_through :api
-  end
+  # scope "/api", Phoenixbin do
+  #   pipe_through :api
+  # end
 end

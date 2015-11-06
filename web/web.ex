@@ -22,6 +22,9 @@ defmodule Phoenixbin.Web do
 
       import Ecto.Changeset
       import Ecto.Query, only: [from: 1, from: 2]
+
+      @primary_key {:id, :binary_id, autogenerate: true}
+      @foreign_key_type :binary_id
     end
   end
 
@@ -43,6 +46,9 @@ defmodule Phoenixbin.Web do
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
+
+      # Use all HTML functionality (forms, tags, etc)
+      use Phoenix.HTML
 
       import Phoenixbin.Router.Helpers
     end
