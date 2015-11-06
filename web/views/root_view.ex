@@ -1,3 +1,3 @@
-defmodule Phoenixbin.RootView do
-  use Phoenixbin.Web, :view
+defmodule Requestbox.RootView do
+  use Requestbox.Web, :view
 end

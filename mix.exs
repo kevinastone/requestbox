@@ -1,8 +1,8 @@
-defmodule Phoenixbin.Mixfile do
+defmodule Requestbox.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :phoenixbin,
+    [app: :requestbox,
      version: "0.0.1",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -17,7 +17,7 @@ defmodule Phoenixbin.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Phoenixbin, []},
+    [mod: {Requestbox, []},
      applications: [:phoenix, :cowboy, :logger, :quantum,
                     # :timex, :tzdata,
                     :phoenix_html, :phoenix_ecto, :postgrex, :sqlite_ecto]]

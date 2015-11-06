@@ -1,4 +1,4 @@
-defmodule Phoenixbin.Repo.Migrations.CreateRequest do
+defmodule Requestbox.Repo.Migrations.CreateRequest do
   use Ecto.Migration
 
   def change do

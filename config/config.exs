@@ -6,12 +6,12 @@
 use Mix.Config
 
 # Configures the endpoint
-config :phoenixbin, Phoenixbin.Endpoint,
+config :requestbox, Requestbox.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "HuiaFVoiGvYFhfAPG/OOMmOI9DV0kAVe4TZVbq1lR3nSWtdeRVmniAFVU+H84aBx",
   render_errors: [accepts: ~w(json)],
-  pubsub: [name: Phoenixbin.PubSub,
+  pubsub: [name: Requestbox.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
@@ -29,5 +29,5 @@ config :phoenix, :generators,
   binary_id: false
 
 config :quantum, cron: [
-  "@hourly": {Phoenixbin.Session, :cleanup}
+  "@hourly": {Requestbox.Session, :cleanup}
 ]

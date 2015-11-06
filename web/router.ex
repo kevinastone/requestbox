@@ -1,5 +1,5 @@
-defmodule Phoenixbin.Router do
-  use Phoenixbin.Web, :router
+defmodule Requestbox.Router do
+  use Requestbox.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,13 +13,13 @@ defmodule Phoenixbin.Router do
     # plug :accepts, ["json"]
   end
 
-  scope "/", Phoenixbin, as: :root do
+  scope "/", Requestbox, as: :root do
     pipe_through :browser
 
     resources "/", SessionController, only: [:index, :create, :show]
   end
 
-  scope "/api", Phoenixbin, as: :api do
+  scope "/api", Requestbox, as: :api do
     pipe_through :api
 
     get "/:session_id", RequestController, :capture

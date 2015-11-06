@@ -1,4 +1,4 @@
-# Phoenixbin
+# Requestbox
 
 To start your Phoenix app:
 

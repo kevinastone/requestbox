@@ -1,7 +1,7 @@
-defmodule Phoenixbin.SessionTest do
-  use Phoenixbin.ModelCase
+defmodule Requestbox.SessionTest do
+  use Requestbox.ModelCase
 
-  alias Phoenixbin.Session
+  alias Requestbox.Session
 
   @valid_attrs %{}
   @invalid_attrs %{}

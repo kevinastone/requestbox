@@ -1,12 +1,12 @@
 <div class="jumbotron">
   <h1>Inspect HTTP Requests</h1>
   <p>
-    PhoenixBin gives you a URL that will collect requests made to it and let you inspect them in a human-friendly way.
-Use PhoenixBin to see what your HTTP client is sending or to inspect and debug webhook requests.
+    RequestBox gives you a URL that will collect requests made to it and let you inspect them in a human-friendly way.
+Use RequestBox to see what your HTTP client is sending or to inspect and debug webhook requests.
   </p>
   <%= form_for @changeset, root_session_path(@conn, :create), fn _f -> %>
   <p>
-    <%= submit "Create a PhoenixBin", class: "btn btn-primary btn-lg", role: "button" %>
+    <%= submit "Create a RequestBox", class: "btn btn-primary btn-lg", role: "button" %>
   </p>
   <% end %>
 </div>

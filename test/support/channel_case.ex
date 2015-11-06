@@ -1,4 +1,4 @@
-defmodule Phoenixbin.ChannelCase do
+defmodule Requestbox.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -20,19 +20,19 @@ defmodule Phoenixbin.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
-      alias Phoenixbin.Repo
+      alias Requestbox.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
 
       # The default endpoint for testing
-      @endpoint Phoenixbin.Endpoint
+      @endpoint Requestbox.Endpoint
     end
   end
 
   setup tags do
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(Phoenixbin.Repo, [])
+      Ecto.Adapters.SQL.restart_test_transaction(Requestbox.Repo, [])
     end
 
     :ok

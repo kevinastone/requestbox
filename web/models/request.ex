@@ -1,4 +1,4 @@
-defmodule Phoenixbin.Header do
+defmodule Requestbox.Header do
   defstruct [:name, :value]
 
   defmodule Type do
@@ -6,32 +6,32 @@ defmodule Phoenixbin.Header do
     @behaviour Ecto.Type
     def type, do: :text
 
-    def cast(%Phoenixbin.Header{} = header), do: header
-    def cast(%{} = header), do: struct(Phoenixbin.Header, header)
+    def cast(%Requestbox.Header{} = header), do: header
+    def cast(%{} = header), do: struct(Requestbox.Header, header)
 
-    def load(value), do: Poison.decode(value, as: Phoenixbin.Header)
+    def load(value), do: Poison.decode(value, as: Requestbox.Header)
     def dump(value), do: Poison.encode(value)
   end
 end
 
-defmodule Phoenixbin.Headers do
+defmodule Requestbox.Headers do
   defmodule Type do
 
     @behaviour Ecto.Type
     def type, do: :text
 
     def cast(headers) when is_list(headers) do
-      {:ok, Enum.map(headers, &Phoenixbin.Header.Type.cast/1)}
+      {:ok, Enum.map(headers, &Requestbox.Header.Type.cast/1)}
     end
     def cast(_other), do: :error
 
-    def load(value), do: Poison.decode(value, as: [Phoenixbin.Header])
+    def load(value), do: Poison.decode(value, as: [Requestbox.Header])
     def dump(value), do: Poison.encode(value)
   end
 end
 
-defmodule Phoenixbin.Request do
-  use Phoenixbin.Web, :model
+defmodule Requestbox.Request do
+  use Requestbox.Web, :model
   use Timex.Ecto.Timestamps
 
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -40,10 +40,10 @@ defmodule Phoenixbin.Request do
     field :client_ip, :string
     field :path, :string
     field :query_string, :string
-    field :headers, Phoenixbin.Headers.Type
+    field :headers, Requestbox.Headers.Type
     field :body, :string
 
-    belongs_to :session, Phoenixbin.Session
+    belongs_to :session, Requestbox.Session
     timestamps
   end
 

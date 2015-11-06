@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :phoenixbin, Phoenixbin.Endpoint,
+config :requestbox, Requestbox.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -23,7 +23,7 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
-config :phoenixbin, Phoenixbin.Repo,
+config :requestbox, Requestbox.Repo,
   adapter: Sqlite.Ecto,
   database: "dev.sqlite3",
   hostname: "localhost",

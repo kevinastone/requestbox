@@ -1,14 +1,14 @@
-defmodule Phoenixbin.Endpoint do
-  use Phoenix.Endpoint, otp_app: :phoenixbin
+defmodule Requestbox.Endpoint do
+  use Phoenix.Endpoint, otp_app: :requestbox
 
-  socket "/socket", Phoenixbin.UserSocket
+  socket "/socket", Requestbox.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :phoenixbin, gzip: false,
+    at: "/", from: :requestbox, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -33,5 +33,5 @@ defmodule Phoenixbin.Endpoint do
     key: "_phoenixbin_key",
     signing_salt: "i8W95jtn"
 
-  plug Phoenixbin.Router
+  plug Requestbox.Router
 end

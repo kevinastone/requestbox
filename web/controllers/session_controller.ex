@@ -1,8 +1,8 @@
-defmodule Phoenixbin.SessionController do
-  use Phoenixbin.Web, :controller
+defmodule Requestbox.SessionController do
+  use Requestbox.Web, :controller
 
-  alias Phoenixbin.Request
-  alias Phoenixbin.Session
+  alias Requestbox.Request
+  alias Requestbox.Session
 
   def index(conn, _params) do
     changeset = Session.changeset(%Session{})

@@ -1,7 +1,7 @@
-defmodule Phoenixbin.RequestTest do
-  use Phoenixbin.ModelCase
+defmodule Requestbox.RequestTest do
+  use Requestbox.ModelCase
 
-  alias Phoenixbin.Request
+  alias Requestbox.Request
 
   @valid_attrs %{body: "some content", headers: "some content", method: "some content"}
   @invalid_attrs %{}

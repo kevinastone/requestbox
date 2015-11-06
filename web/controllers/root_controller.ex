@@ -1,5 +1,5 @@
-defmodule Phoenixbin.RootController do
-  use Phoenixbin.Web, :controller
+defmodule Requestbox.RootController do
+  use Requestbox.Web, :controller
 
   def index(conn, _params) do
     render conn, :index

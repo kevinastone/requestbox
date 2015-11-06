@@ -1,4 +1,4 @@
-defmodule Phoenixbin.ModelCase do
+defmodule Requestbox.ModelCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -16,16 +16,16 @@ defmodule Phoenixbin.ModelCase do
 
   using do
     quote do
-      alias Phoenixbin.Repo
+      alias Requestbox.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
-      import Phoenixbin.ModelCase
+      import Requestbox.ModelCase
     end
   end
 
   setup tags do
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(Phoenixbin.Repo, [])
+      Ecto.Adapters.SQL.restart_test_transaction(Requestbox.Repo, [])
     end
 
     :ok

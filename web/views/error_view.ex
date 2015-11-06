@@ -1,5 +1,5 @@
-defmodule Phoenixbin.ErrorView do
-  use Phoenixbin.Web, :view
+defmodule Requestbox.ErrorView do
+  use Requestbox.Web, :view
 
   def render("404.json", _assigns) do
     %{errors: %{detail: "Page not found"}}

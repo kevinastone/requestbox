@@ -1,9 +1,9 @@
-defmodule Phoenixbin.RequestController do
-  use Phoenixbin.Web, :controller
+defmodule Requestbox.RequestController do
+  use Requestbox.Web, :controller
 
-  alias Phoenixbin.Request
-  alias Phoenixbin.Header
-  alias Phoenixbin.Session
+  alias Requestbox.Request
+  alias Requestbox.Header
+  alias Requestbox.Session
 
   def get_body(conn, initial_body \\ "") do
     case read_body(conn) do

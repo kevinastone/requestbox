@@ -1,12 +1,12 @@
-defmodule Phoenixbin.Web do
+defmodule Requestbox.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Phoenixbin.Web, :controller
-      use Phoenixbin.Web, :view
+      use Requestbox.Web, :controller
+      use Requestbox.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -32,11 +32,11 @@ defmodule Phoenixbin.Web do
     quote do
       use Phoenix.Controller
 
-      alias Phoenixbin.Repo
+      alias Requestbox.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
 
-      import Phoenixbin.Router.Helpers
+      import Requestbox.Router.Helpers
     end
   end
 
@@ -50,7 +50,7 @@ defmodule Phoenixbin.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Phoenixbin.Router.Helpers
+      import Requestbox.Router.Helpers
 
       def format_date(date) do
         date
@@ -91,7 +91,7 @@ defmodule Phoenixbin.Web do
     quote do
       use Phoenix.Channel
 
-      alias Phoenixbin.Repo
+      alias Requestbox.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
     end

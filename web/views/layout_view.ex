@@ -1,3 +1,3 @@
-defmodule Phoenixbin.LayoutView do
-  use Phoenixbin.Web, :view
+defmodule Requestbox.LayoutView do
+  use Requestbox.Web, :view
 end
