@@ -34,6 +34,7 @@ defmodule Phoenixbin do
 
   defmodule Request do
     use Phoenixbin.Web, :model
+    use Timex.Ecto.Timestamps
 
     @primary_key {:id, :binary_id, autogenerate: true}
     schema "requests" do
@@ -66,5 +67,10 @@ defmodule Phoenixbin do
       from p in query,
       order_by: [desc: p.inserted_at]
     end
+
+  def format_date(date) do
+    date
+    |> Timex.DateFormat.format!("%B %e, %Y", :strftime)
+  end
   end
 end

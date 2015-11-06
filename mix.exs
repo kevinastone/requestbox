@@ -18,7 +18,7 @@ defmodule Phoenixbin.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Phoenixbin, []},
-     applications: [:phoenix, :cowboy, :logger, :quantum,
+     applications: [:phoenix, :cowboy, :logger, :quantum, :timex,
                     :phoenix_html, :phoenix_ecto, :postgrex, :sqlite_ecto]]
   end
 
@@ -37,7 +37,8 @@ defmodule Phoenixbin.Mixfile do
      {:sqlite_ecto, "~> 1.0.0"},
      {:cowboy, "~> 1.0"},
      {:quantum, ">= 1.5.0"},
-     {:poison, "~> 1.5"}
+     {:poison, "~> 1.5"},
+     {:timex_ecto, "~> 0.5.0"}
    ]
   end
 

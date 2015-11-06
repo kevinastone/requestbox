@@ -1,5 +1,6 @@
 defmodule Phoenixbin.Session do
   use Phoenixbin.Web, :model
+  use Timex.Ecto.Timestamps
 
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "sessions" do
