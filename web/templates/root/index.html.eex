@@ -1,0 +1,7 @@
+<div class="jumbotron">
+  <h2>Inspect HTTP Requests</h2>
+  <p>
+    PhoenixBin gives you a URL that will collect requests made to it and let you inspect them in a human-friendly way.
+Use PhoenixBin to see what your HTTP client is sending or to inspect and debug webhook requests.
+  </p>
+</div>
