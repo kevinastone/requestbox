@@ -1,6 +1,6 @@
 <form class="form-horizontal">
   <div class="form-group">
-    <label for="sessionUrl" class="col-sm-2 control-label">Bin URL</label>
+    <label for="sessionUrl" class="col-sm-2 control-label">Box URL</label>
     <div class="col-sm-10">
       <input id="sessionUrl" class="form-control" type="text" value="<%= api_request_url(@conn, :capture, @session.id) %>" onfocus="setTimeout(function() {select();})"></h2>
     </div>
