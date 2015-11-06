@@ -34,7 +34,7 @@ defmodule Phoenixbin do
 
   defmodule Request do
     use Phoenixbin.Web, :model
-    use Timex.Ecto.Timestamps
+    # use Timex.Ecto.Timestamps
 
     @primary_key {:id, :binary_id, autogenerate: true}
     schema "requests" do
