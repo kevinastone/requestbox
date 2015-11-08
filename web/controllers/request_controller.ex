@@ -2,7 +2,6 @@ defmodule Requestbox.RequestController do
   use Requestbox.Web, :controller
 
   alias Requestbox.Request
-  alias Requestbox.Header
   alias Requestbox.Session
 
   def get_body(conn, initial_body \\ "") do
@@ -16,7 +15,7 @@ defmodule Requestbox.RequestController do
 
   def capture(conn, %{"session_id" => session_id}) do
     session = Repo.get!(Session, session_id)
-    headers = Enum.map(conn.req_headers, fn {name, value} -> %Header{name: name, value: value} end)
+    headers = Enum.map(conn.req_headers, fn {name, value} -> %Request.Header{name: name, value: value} end)
 
     # request.client_netaddr = conn.remote_ip
     changeset = Request.changeset(%Request{}, %{

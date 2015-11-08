@@ -1,4 +1,4 @@
-defmodule Requestbox.Header do
+defmodule Requestbox.Request.Header do
   defstruct [:name, :value]
 
   defmodule Type do
@@ -6,26 +6,26 @@ defmodule Requestbox.Header do
     @behaviour Ecto.Type
     def type, do: :text
 
-    def cast(%Requestbox.Header{} = header), do: header
-    def cast(%{} = header), do: struct(Requestbox.Header, header)
+    def cast(%Requestbox.Request.Header{} = header), do: header
+    def cast(%{} = header), do: struct(Requestbox.Request.Header, header)
 
-    def load(value), do: Poison.decode(value, as: Requestbox.Header)
+    def load(value), do: Poison.decode(value, as: Requestbox.Request.Header)
     def dump(value), do: Poison.encode(value)
   end
 end
 
-defmodule Requestbox.Headers do
+defmodule Requestbox.Request.Headers do
   defmodule Type do
 
     @behaviour Ecto.Type
     def type, do: :text
 
     def cast(headers) when is_list(headers) do
-      {:ok, Enum.map(headers, &Requestbox.Header.Type.cast/1)}
+      {:ok, Enum.map(headers, &Requestbox.Request.Header.Type.cast/1)}
     end
     def cast(_other), do: :error
 
-    def load(value), do: Poison.decode(value, as: [Requestbox.Header])
+    def load(value), do: Poison.decode(value, as: [Requestbox.Request.Header])
     def dump(value), do: Poison.encode(value)
   end
 end
@@ -40,7 +40,7 @@ defmodule Requestbox.Request do
     field :client_ip, :string
     field :path, :string
     field :query_string, :string
-    field :headers, Requestbox.Headers.Type
+    field :headers, Requestbox.Request.Headers.Type
     field :body, :string
 
     belongs_to :session, Requestbox.Session
