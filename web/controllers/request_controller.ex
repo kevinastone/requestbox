@@ -14,6 +14,7 @@ defmodule Requestbox.RequestController do
   end
 
   def capture(conn, %{"session_id" => session_id}) do
+    session_id = Requestbox.ID.decode(session_id)
     session = Repo.get!(Session, session_id)
     headers = Enum.map(conn.req_headers, fn {name, value} -> %Request.Header{name: name, value: value} end)
 

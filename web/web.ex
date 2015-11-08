@@ -22,9 +22,6 @@ defmodule Requestbox.Web do
 
       import Ecto.Changeset
       import Ecto.Query, only: [from: 1, from: 2]
-
-      @primary_key {:id, :binary_id, autogenerate: true}
-      @foreign_key_type :binary_id
     end
   end
 
@@ -37,6 +34,7 @@ defmodule Requestbox.Web do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import Requestbox.Router.Helpers
+      import Requestbox.Router.TokenHelpers
     end
   end
 
@@ -51,6 +49,7 @@ defmodule Requestbox.Web do
       use Phoenix.HTML
 
       import Requestbox.Router.Helpers
+      import Requestbox.Router.TokenHelpers
 
       def format_date(date) do
         date

@@ -24,3 +24,4 @@ erl_crash.dump
 /config/prod.secret.exs
 
 /*.sqlite3
+/*.sqlite3-journal

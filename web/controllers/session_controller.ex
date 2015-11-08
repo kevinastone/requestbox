@@ -15,15 +15,16 @@ defmodule Requestbox.SessionController do
     case Repo.insert(changeset) do
       {:ok, session} ->
         conn
-        |> redirect(to: root_session_path(conn, :show, session.id))
+        |> redirect(to: token_root_session_path(conn, :show, session.id))
       {:error, _changeset} ->
         conn
         |> put_flash(:error, "Failed to create a session.")
-        |> redirect(to: root_session_path(conn, :index))
+        |> redirect(to: token_root_session_path(conn, :index))
     end
   end
 
   def show(conn, %{"id" => id}) do
+    id = Requestbox.ID.decode(id)
     session = Repo.get!(Session, id) |> Repo.preload(requests: from(r in Request, order_by: [desc: r.inserted_at]))
     render(conn, "show.html", session: session)
   end

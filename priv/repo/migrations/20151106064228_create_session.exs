@@ -2,9 +2,8 @@ defmodule Requestbox.Repo.Migrations.CreateSession do
   use Ecto.Migration
 
   def change do
-    create table(:sessions, primary_key: false) do
+    create table(:sessions) do
 
-      add :id, :uuid, primary_key: true
       timestamps
     end
 

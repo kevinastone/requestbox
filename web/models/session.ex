@@ -2,7 +2,6 @@ defmodule Requestbox.Session do
   use Requestbox.Web, :model
   use Timex.Ecto.Timestamps
 
-  @primary_key {:id, :binary_id, autogenerate: true}
   schema "sessions" do
 
     has_many :requests, Requestbox.Request, on_delete: :delete_all
