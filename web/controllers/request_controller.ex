@@ -7,35 +7,44 @@ defmodule Requestbox.RequestController do
   def get_body(conn, initial_body \\ "") do
     case read_body(conn) do
       {:ok, body, _conn} ->
-        initial_body <> body
+        {:ok, initial_body <> to_string(body), conn}
       {:more, body, conn} ->
-        get_body(conn, initial_body <> body)
+        get_body(conn, initial_body <> to_string(body))
+      {:error, reason} ->
+        raise reason
     end
   end
 
-  def capture(conn, %{"session_id" => session_id}) do
+  def init(_), do: true
+
+  def action(conn, _) do
+    # %{"session_id" => session_id} = conn.params
+    session_id = List.last conn.script_name
     session_id = Requestbox.ID.decode(session_id)
     session = Repo.get!(Session, session_id)
-    headers = Enum.map(conn.req_headers, fn {name, value} -> %Request.Header{name: name, value: value} end)
 
-    # request.client_netaddr = conn.remote_ip
+    headers = Enum.map(conn.req_headers, fn {name, value} -> %Request.Header{name: name, value: value} end)
+    {:ok, body, conn} = get_body(conn)
+
     changeset = Request.changeset(%Request{}, %{
-      "session_id": session.id,
-      "method": conn.method,
-      "client_ip": :inet.ntoa(conn.remote_ip),
-      "path": conn.request_path,
-      "query_string": conn.query_string,
-      "headers": headers,
-      "body": get_body(conn, "")
+      session_id: session.id,
+      method: conn.method,
+      client_ip: to_string(:inet.ntoa(conn.remote_ip)),
+      path: conn.request_path,
+      query_string: conn.query_string,
+      headers: headers,
+      body: body
     })
 
     case Repo.insert(changeset) do
       {:ok, request} ->
         conn
-        |> text request.id
+        |> put_resp_content_type("text/plain")
+        |> send_resp(200, request.id)
       {:error, changeset} ->
         conn
-        |> text inspect(changeset.errors)
+        |> put_resp_content_type("text/plain")
+        |> send_resp(400, inspect(changeset.errors))
     end
   end
 end

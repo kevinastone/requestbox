@@ -1,38 +1,45 @@
-defmodule Requestbox.Request.Header do
-  defstruct [:name, :value]
-
-  defmodule Type do
-
-    @behaviour Ecto.Type
-    def type, do: :text
-
-    def cast(%Requestbox.Request.Header{} = header), do: header
-    def cast(%{} = header), do: struct(Requestbox.Request.Header, header)
-
-    def load(value), do: Poison.decode(value, as: Requestbox.Request.Header)
-    def dump(value), do: Poison.encode(value)
-  end
-end
-
-defmodule Requestbox.Request.Headers do
-  defmodule Type do
-
-    @behaviour Ecto.Type
-    def type, do: :text
-
-    def cast(headers) when is_list(headers) do
-      {:ok, Enum.map(headers, &Requestbox.Request.Header.Type.cast/1)}
-    end
-    def cast(_other), do: :error
-
-    def load(value), do: Poison.decode(value, as: [Requestbox.Request.Header])
-    def dump(value), do: Poison.encode(value)
-  end
-end
-
 defmodule Requestbox.Request do
+
+  defmodule Header do
+    defstruct [:name, :value]
+
+    defmodule Type do
+
+      alias Requestbox.Request.Header
+
+      @behaviour Ecto.Type
+      def type, do: :text
+
+      def cast(%Header{} = header), do: header
+      def cast(%{} = header), do: struct(Header, header)
+
+      def load(value), do: Poison.decode(value, as: Header)
+      def dump(value), do: Poison.encode(value)
+    end
+  end
+
+  defmodule Headers do
+    defmodule Type do
+
+      alias Requestbox.Request.Header
+
+      @behaviour Ecto.Type
+      def type, do: :text
+
+      def cast(headers) when is_list(headers) do
+        {:ok, Enum.map(headers, &Header.Type.cast/1)}
+      end
+      def cast(_other), do: :error
+
+      def load(value), do: Poison.decode(value, as: [Header])
+      def dump(value), do: Poison.encode(value)
+    end
+  end
+
   use Requestbox.Web, :model
   use Timex.Ecto.Timestamps
+
+  alias Requestbox.Request.Headers
 
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "requests" do
@@ -40,7 +47,7 @@ defmodule Requestbox.Request do
     field :client_ip, :string
     field :path, :string
     field :query_string, :string
-    field :headers, Requestbox.Request.Headers.Type
+    field :headers, Headers.Type
     field :body, :string
 
     belongs_to :session, Requestbox.Session
@@ -48,7 +55,7 @@ defmodule Requestbox.Request do
   end
 
   @required_fields ~w(session_id method path)
-  @optional_fields ~w(headers body query_string)
+  @optional_fields ~w(client_ip headers body query_string)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

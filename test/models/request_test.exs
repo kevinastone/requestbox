@@ -8,7 +8,7 @@ defmodule Requestbox.RequestTest do
 
   test "changeset with valid attributes" do
     changeset = Request.changeset(%Request{}, @valid_attrs)
-    assert(changeset.valid?, IO.inspect(changeset.errors))
+    assert(changeset.valid?, inspect(changeset.errors))
   end
 
   test "changeset with invalid attributes" do

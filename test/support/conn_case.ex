@@ -23,7 +23,6 @@ defmodule Requestbox.ConnCase do
       alias Requestbox.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
-      use Plug.Test
 
       import Requestbox.Router.Helpers
 

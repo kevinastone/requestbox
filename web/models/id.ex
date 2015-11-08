@@ -29,8 +29,6 @@ defmodule Requestbox.ID do
       prefix = options[:prefix]
       # {:name, helper_name} = :erlang.fun_info(unquote(helper), :name)
 
-      IO.inspect(module)
-      IO.inspect(prefix)
       # prefix = unquote(prefix)
       # functions = module.__info__(:functions)
       # IO.inspect(functions)

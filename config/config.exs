@@ -10,7 +10,6 @@ config :requestbox, Requestbox.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "HuiaFVoiGvYFhfAPG/OOMmOI9DV0kAVe4TZVbq1lR3nSWtdeRVmniAFVU+H84aBx",
-  render_errors: [accepts: ~w(json html)],
   pubsub: [name: Requestbox.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
