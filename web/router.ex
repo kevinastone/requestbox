@@ -57,7 +57,7 @@ defmodule Requestbox.Router.TokenHelpers do
     Requestbox.Router.Helpers.root_session_path(conn_or_endpoint, opts, vars, params)
   end
 
-  def token_request_path(conn_or_endpoint, opts, vars \\ [], params \\ []) do
+  def token_request_path(_conn_or_endpoint, _opts, vars \\ [], _params \\ []) do
     vars = case vars do
       vars when is_list(vars) -> Enum.map(vars, fn var -> Requestbox.ID.encode(var) end)
       vars -> Requestbox.ID.encode(vars)
