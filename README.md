@@ -1,5 +1,7 @@
 # RequestBox
 
+[![Build Status](https://travis-ci.org/kevinastone/requestbox.svg?branch=master)](https://travis-ci.org/kevinastone/requestbox)
+
 RequestBox allows you to register endpoints that will record and capture HTTP
 requests similar to [RequestBin](http://requestb.in/).  It's useful for
 debugging webhooks and other API clients.
