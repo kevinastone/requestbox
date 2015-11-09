@@ -1,8 +1,8 @@
-<form class="form-horizontal">
+<form>
   <div class="form-group">
-    <label for="sessionUrl" class="col-sm-2 control-label">Box URL</label>
-    <div class="col-sm-10">
-      <input id="sessionUrl" class="form-control" type="text" value="<%= token_request_url(@conn, :capture, @session.id) %>" onfocus="setTimeout(function() {select();})"></h2>
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon3">Box URL</span>
+      <input id="sessionUrl" class="form-control" type="text" value="<%= token_request_url(@conn, :capture, @session.id) %>" onfocus="setTimeout(function() {select();})">
     </div>
   </div>
 </form>
@@ -13,8 +13,7 @@
     <%= render "request.html", request: request %>
   <% end %>
 <% else %>
-    <p>Make a request to get started. After making a request, You will see this page update live.</p>
-    <h3>cURL</h3>
-    <pre><code>curl -X POST -d "fizz=buzz" <%= token_request_url(@conn, :capture, @session.id) %></code></pre>
-
+  <p>Make a request to get started. After making a request, Reload the page to see the updates.</p>
+  <h3>cURL</h3>
+  <pre><code>curl -X POST -d "fizz=buzz" <%= token_request_url(@conn, :capture, @session.id) %></code></pre>
 <% end %>
