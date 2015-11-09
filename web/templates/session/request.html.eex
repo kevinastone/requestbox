@@ -27,10 +27,9 @@
   <% end %>
   <%= if String.first(@request.query_string) do %>
   <div class="form-group">
-    <label for="queryString" class="col-sm-2 control-label">Query String</label>
+    <label for="queryString" class="col-sm-2 control-label">Query</label>
     <div class="col-sm-10">
-      <pre><code><%= @request.query_string %></code></pre>
-      <p>
+      <p class="form-control-static">
       <%= for {key, value} <- URI.query_decoder(@request.query_string) do %>
         <kbd><%= key %><%= if value do %>=<%= value %><% end %></kbd>
       <% end %>
@@ -43,13 +42,8 @@
   <div class="form-group">
     <label for="queryParts" class="col-sm-2 control-label">Headers</label>
     <div class="col-sm-10">
-      <pre><%= for header <- @request.headers do %><%= header.name %>: <%= header.value %>
+      <pre><%= for header <- @request.headers do %><%= header_case(header.name) %>: <%= header.value %>
 <% end %></pre>
-      <p>
-      <%= for header <- @request.headers do %>
-        <kbd><%= header.name %>: <%= header.value %></kbd><br>
-      <% end %>
-      </p>
     </div>
   </div>
   <% end %>

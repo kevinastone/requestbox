@@ -45,6 +45,7 @@ defmodule Requestbox.RequestController do
         conn
         |> put_resp_content_type("text/plain")
         |> send_resp(400, inspect(changeset.errors))
+        |> halt
     end
   end
 end
