@@ -4,13 +4,15 @@ defmodule Requestbox.SessionController do
   alias Requestbox.Request
   alias Requestbox.Session
 
+  plug :scrub_params, "session" when action in [:create, :update]
+
   def index(conn, _params) do
     changeset = Session.changeset(%Session{})
     render conn, :index, changeset: changeset
   end
 
-  def create(conn, _params) do
-    changeset = Session.changeset(%Session{}, %{})
+  def create(conn, %{"session" => session_params}) do
+    changeset = Session.changeset(%Session{}, session_params)
 
     case Repo.insert(changeset) do
       {:ok, session} ->

@@ -4,12 +4,13 @@ defmodule Requestbox.Session do
 
   schema "sessions" do
 
+    field :token, :string
     has_many :requests, Requestbox.Request, on_delete: :delete_all
     timestamps
   end
 
   @required_fields ~w()
-  @optional_fields ~w(requests)
+  @optional_fields ~w(requests token)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

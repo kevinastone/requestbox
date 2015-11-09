@@ -11,8 +11,13 @@ defmodule Requestbox.SessionControllerTest do
     assert html_response(conn, 200)
   end
 
-  test "POST /" do
-    conn = post conn(), "/"
+  test "Create Session" do
+    conn = post conn(), "/", %{"session" => %{}}
+    assert redirected_to(conn)
+  end
+
+  test "Create Session with token" do
+    conn = post conn(), "/", %{"session" => %{"token" => "abcd"}}
     assert redirected_to(conn)
   end
 
