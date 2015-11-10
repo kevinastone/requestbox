@@ -11,11 +11,11 @@ defmodule Requestbox.RequestControllerTest do
     end
   end
 
-  # test "GET unknown request" do
-  #   path = token_request_path(conn(), :capture, 9999)
-  #   conn = get(conn(), path)
-  #   assert text_response(conn, 404)
-  # end
+  def _session(%Session{} = session) do
+    case Repo.insert(session) do
+      {:ok, session} -> session
+    end
+  end
 
   setup context do
     context = Dict.put context, :session, _session()
@@ -34,6 +34,55 @@ defmodule Requestbox.RequestControllerTest do
     assert request_id
     request = Repo.get!(Request, request_id)
     request
+  end
+
+  @tag :skip
+  test "GET unknown request" do
+    path = token_request_path(conn(), nil, 9999)
+    conn = get(conn(), path)
+    assert text_response(conn, 404)
+  end
+
+  test "Request with Token without credentials" do
+    session = _session(%Session{token: "abcd"})
+    path = token_request_path(conn(), nil, session.id)
+    conn
+    |> get(path)
+    |> response(403)
+  end
+
+  test "Request with Token with header credentials" do
+    session = _session(%Session{token: "abcd"})
+    path = token_request_path(conn(), nil, session.id)
+    conn
+    |> put_req_header("authorization", "Bearer abcd")
+    |> get(path)
+    |> response(200)
+  end
+
+  test "Request with Token with invalid header credentials" do
+    session = _session(%Session{token: "abcd"})
+    path = token_request_path(conn(), nil, session.id)
+    conn
+    |> put_req_header("authorization", "Bearer xyz")
+    |> get(path)
+    |> response(403)
+  end
+
+  test "Request with Token with query credentials" do
+    session = _session(%Session{token: "abcd"})
+    path = token_request_path(conn(), nil, session.id, token: "abcd")
+    conn
+    |> get(path)
+    |> response(200)
+  end
+
+  test "Request with Token with invalid query credentials" do
+    session = _session(%Session{token: "abcd"})
+    path = token_request_path(conn(), nil, session.id, token: "xyz")
+    conn
+    |> get(path)
+    |> response(403)
   end
 
   test "Capture header request", context do

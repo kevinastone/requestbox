@@ -49,23 +49,27 @@ end
 
 defmodule Requestbox.Router.TokenHelpers do
 
-  def token_root_session_path(conn_or_endpoint, opts, vars \\ [], params \\ []) do
-    vars = case vars do
-      vars when is_list(vars) -> Enum.map(vars, fn var -> Requestbox.ID.encode(var) end)
-      vars -> Requestbox.ID.encode(vars)
+  def token_root_session_path(conn_or_endpoint, opts, id \\ nil, params \\ []) do
+    id = case id do
+      nil -> nil
+      id -> Requestbox.ID.encode(id)
     end
-    Requestbox.Router.Helpers.root_session_path(conn_or_endpoint, opts, vars, params)
+    Requestbox.Router.Helpers.root_session_path(conn_or_endpoint, opts, id, params)
   end
 
-  def token_request_path(_conn_or_endpoint, _opts, vars \\ [], _params \\ []) do
-    vars = case vars do
-      vars when is_list(vars) -> Enum.map(vars, fn var -> Requestbox.ID.encode(var) end)
-      vars -> Requestbox.ID.encode(vars)
+  def token_request_path(_conn_or_endpoint, _opts, session_id, params \\ []) do
+    session_id = case session_id do
+      nil -> nil
+      session_id -> Requestbox.ID.encode(session_id)
     end
-    Enum.join(["/req"|List.wrap(vars)], "/")
+    url = Enum.join(["/req"|List.wrap(session_id)], "/")
+    case params do
+      [] -> url
+      params -> url <> "?" <> Plug.Conn.Query.encode(params)
+    end
   end
 
-  def token_request_url(conn_or_endpoint, opts, vars \\ [], params \\ []) do
-    Phoenix.Router.Helpers.url(__MODULE__,conn_or_endpoint) <> token_request_path(conn_or_endpoint, opts, vars, params)
+  def token_request_url(conn_or_endpoint, opts, session_id, params \\ []) do
+    Phoenix.Router.Helpers.url(__MODULE__,conn_or_endpoint) <> token_request_path(conn_or_endpoint, opts, session_id, params)
   end
 end
