@@ -36,11 +36,14 @@ defmodule Requestbox.RequestControllerTest do
     request
   end
 
-  @tag :skip
   test "GET unknown request" do
     path = token_request_path(conn(), nil, 9999)
-    conn = get(conn(), path)
-    assert text_response(conn, 404)
+    try do
+      conn = get(conn(), path)
+      assert text_response(conn, 404)
+    rescue
+      Ecto.NoResultsError -> true
+    end
   end
 
   test "Request with Token without credentials" do

@@ -18,6 +18,9 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :hashids,
+  salt: "DtALrFb9ZQAghcOrxeE1azn6y5kf3OuZ"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
@@ -30,6 +33,3 @@ config :phoenix, :generators,
 config :quantum, cron: [
   "@hourly": {Requestbox.Session, :cleanup}
 ]
-
-config :hashids,
-  salt: "DtALrFb9ZQAghcOrxeE1azn6y5kf3OuZ"
