@@ -49,19 +49,19 @@ end
 
 defmodule Requestbox.Router.TokenHelpers do
 
-  def token_root_session_path(conn_or_endpoint, opts, id \\ nil, params \\ []) do
-    id = case id do
-      nil -> nil
-      id -> Requestbox.ID.encode(id)
-    end
-    Requestbox.Router.Helpers.root_session_path(conn_or_endpoint, opts, id, params)
-  end
+  # def token_root_session_path(conn_or_endpoint, opts, id \\ nil, params \\ []) do
+  #   id = case id do
+  #     nil -> nil
+  #     id -> Requestbox.HashID.encode(id)
+  #   end
+  #   Requestbox.Router.Helpers.root_session_path(conn_or_endpoint, opts, id, params)
+  # end
 
-  def token_request_path(_conn_or_endpoint, _opts, session_id, params \\ []) do
+  def request_path(_conn_or_endpoint, _opts, %{:id => session_id}, params \\ []) do
     path = "/req"
     path = case session_id do
       nil -> path
-      session_id -> Enum.join([path, Requestbox.ID.encode(session_id)], "/")
+      session_id -> Enum.join([path, Requestbox.HashID.encode(session_id)], "/")
     end
     case params do
       [] -> path
@@ -69,7 +69,7 @@ defmodule Requestbox.Router.TokenHelpers do
     end
   end
 
-  def token_request_url(conn_or_endpoint, opts, session_id, params \\ []) do
-    Phoenix.Router.Helpers.url(__MODULE__, conn_or_endpoint) <> token_request_path(conn_or_endpoint, opts, session_id, params)
+  def request_url(conn_or_endpoint, opts, session, params \\ []) do
+    Phoenix.Router.Helpers.url(__MODULE__, conn_or_endpoint) <> request_path(conn_or_endpoint, opts, session, params)
   end
 end

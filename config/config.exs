@@ -29,7 +29,3 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
-
-config :quantum, cron: [
-  "@hourly": {Requestbox.Session, :cleanup}
-]

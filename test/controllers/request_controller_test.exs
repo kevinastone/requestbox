@@ -23,7 +23,7 @@ defmodule Requestbox.RequestControllerTest do
   end
 
   setup context do
-    context = Dict.put context, :path, conn() |> token_request_path(nil, context.session.id)
+    context = Dict.put context, :path, conn() |> request_path(nil, context.session)
     {:ok, context}
   end
 
@@ -37,7 +37,7 @@ defmodule Requestbox.RequestControllerTest do
   end
 
   test "GET unknown request" do
-    path = token_request_path(conn(), nil, 9999)
+    path = request_path(conn(), nil, %Session{id: 9999})
     try do
       conn = get(conn(), path)
       assert text_response(conn, 404)
@@ -48,7 +48,7 @@ defmodule Requestbox.RequestControllerTest do
 
   test "Request with Token without credentials" do
     session = _session(%Session{token: "abcd"})
-    path = token_request_path(conn(), nil, session.id)
+    path = request_path(conn(), nil, session)
     conn
     |> get(path)
     |> response(403)
@@ -56,7 +56,7 @@ defmodule Requestbox.RequestControllerTest do
 
   test "Request with Token with header credentials" do
     session = _session(%Session{token: "abcd"})
-    path = token_request_path(conn(), nil, session.id)
+    path = request_path(conn(), nil, session)
     conn
     |> put_req_header("authorization", "Bearer abcd")
     |> get(path)
@@ -65,7 +65,7 @@ defmodule Requestbox.RequestControllerTest do
 
   test "Request with Token with invalid header credentials" do
     session = _session(%Session{token: "abcd"})
-    path = token_request_path(conn(), nil, session.id)
+    path = request_path(conn(), nil, session)
     conn
     |> put_req_header("authorization", "Bearer xyz")
     |> get(path)
@@ -74,7 +74,7 @@ defmodule Requestbox.RequestControllerTest do
 
   test "Request with Token with query credentials" do
     session = _session(%Session{token: "abcd"})
-    path = token_request_path(conn(), nil, session.id, token: "abcd")
+    path = request_path(conn(), nil, session, token: "abcd")
     conn
     |> get(path)
     |> response(200)
@@ -82,7 +82,7 @@ defmodule Requestbox.RequestControllerTest do
 
   test "Request with Token with invalid query credentials" do
     session = _session(%Session{token: "abcd"})
-    path = token_request_path(conn(), nil, session.id, token: "xyz")
+    path = request_path(conn(), nil, session, token: "xyz")
     conn
     |> get(path)
     |> response(403)

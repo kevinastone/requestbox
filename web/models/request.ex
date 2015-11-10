@@ -38,6 +38,7 @@ defmodule Requestbox.Request do
 
   use Requestbox.Web, :model
   use Timex.Ecto.Timestamps
+  use Requestbox.HashID
 
   alias Requestbox.Request.Headers
 
@@ -53,6 +54,8 @@ defmodule Requestbox.Request do
     belongs_to :session, Requestbox.Session
     timestamps
   end
+
+  encode_param Requestbox.Request, :session_id
 
   @required_fields ~w(session_id method path)
   @optional_fields ~w(client_ip headers body query_string)
