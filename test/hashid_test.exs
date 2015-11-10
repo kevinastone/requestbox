@@ -1,13 +1,15 @@
 defmodule Requestbox.HashIDTest do
   use ExUnit.Case
 
-  alias Requestbox.HashID
+  defmodule TestModule do
+    use Requestbox.HashID, salt: "abcd"
+  end
 
   test "encode ID" do
-    assert HashID.encode(1) == "yQ"
+    assert TestModule.encode(1) == "E2"
   end
 
   test "decode ID" do
-    assert HashID.decode("yQ") == 1
+    assert TestModule.decode("E2") == 1
   end
 end

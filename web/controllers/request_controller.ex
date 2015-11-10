@@ -11,7 +11,7 @@ defmodule Requestbox.RequestController do
 
   defp load_session(conn, _) do
     session_id = List.last conn.script_name
-    session_id = Requestbox.HashID.decode(session_id)
+    session_id = Requestbox.Session.decode(session_id)
     assign(conn, :session, Repo.get!(Session, session_id))
   end
 

@@ -41,6 +41,7 @@ defmodule Requestbox.Request do
   use Requestbox.HashID
 
   alias Requestbox.Request.Headers
+  alias Requestbox.Session
 
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "requests" do
@@ -51,11 +52,11 @@ defmodule Requestbox.Request do
     field :headers, Headers.Type
     field :body, :string
 
-    belongs_to :session, Requestbox.Session
+    belongs_to :session, Session
     timestamps
   end
 
-  encode_param Requestbox.Request, :session_id
+  encode_param Requestbox.Request, :session_id, &Session.encode/1
 
   @required_fields ~w(session_id method path)
   @optional_fields ~w(client_ip headers body query_string)

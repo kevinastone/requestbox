@@ -26,7 +26,7 @@ defmodule Requestbox.SessionController do
   end
 
   def show(conn, %{"id" => id}) do
-    id = Requestbox.HashID.decode(id)
+    id = Requestbox.Session.decode(id)
     session = Repo.get!(Session, id) |> Repo.preload(requests: from(r in Request, order_by: [desc: r.inserted_at]))
     render(conn, "show.html", session: session)
   end

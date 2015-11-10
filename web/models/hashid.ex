@@ -1,26 +1,30 @@
 defmodule Requestbox.HashID do
 
-  @encoder Hashids.new(salt: Application.get_env(:hashids, :salt))
+  defmacro __using__(opts) do
+    salt = case Keyword.fetch(opts, :salt) do
+      {:ok, salt} -> salt
+      :error -> Application.get_env(:hashids, :salt)
+    end
 
-  def encode(id) do
-    Hashids.encode(@encoder, [id])
+    quote do
+      import Requestbox.HashID
+      @local_encoder Hashids.new(salt: unquote(salt))
+      def encode(value), do: Hashids.encode(@local_encoder, [value])
+      def decode(value), do: hd Hashids.decode!(@local_encoder, value)
+    end
   end
 
-  def decode(id) do
-    hd Hashids.decode!(@encoder, id)
-  end
-
-  defmacro __using__(_) do
-    quote do: import Requestbox.HashID
-  end
-
-  defmacro encode_param(module, key \\ :id) do
+  defmacro encode_param(module, key \\ :id, encoder \\ nil) do
 
     quote do
       defimpl Phoenix.Param, for: unquote(module) do
 
         def to_param(%unquote(module){unquote(key) => key}) when is_integer(key) do
-          Requestbox.HashID.encode(key)
+          encoder = unquote(encoder)
+          case encoder do
+            nil -> unquote(module).encode(key)
+            encoder -> encoder.(key)
+          end
         end
       end
     end

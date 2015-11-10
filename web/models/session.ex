@@ -12,7 +12,7 @@ defmodule Requestbox.Session do
     timestamps
   end
 
-  encode_param Session
+  encode_param Session, :id
 
   @required_fields ~w()
   @optional_fields ~w(requests token)
@@ -29,12 +29,3 @@ defmodule Requestbox.Session do
     |> validate_length(:token, min: 4)
   end
 end
-
-# defimpl Phoenix.Param, for: Requestbox.Session do
-
-#   def to_param(%Requestbox.Session{:id => id}) when is_integer(id) do
-#     Requestbox.HashID.encode(id)
-#   end
-
-#   def to_param(%Requestbox.Session{:id => key}), do: Phoenix.Param.to_param(key)
-# end
