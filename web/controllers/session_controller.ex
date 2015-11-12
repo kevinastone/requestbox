@@ -29,7 +29,7 @@ defmodule Requestbox.SessionController do
     conn = conn |> fetch_query_params
     id = Requestbox.Session.decode(id)
     session = Session |> Repo.get(id)
-    page = from(r in Request, where: r.session_id == ^session.id) |> Request.sorted |> Repo.paginate(conn.query_params)
+    page = Request.sorted  |> where([r], r.session_id == ^session.id) |> Repo.paginate(conn.query_params)
     render(conn, "show.html", session: session, page: page)
   end
 end

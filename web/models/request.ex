@@ -72,8 +72,7 @@ defmodule Requestbox.Request do
     |> cast(params, @required_fields, @optional_fields)
   end
 
-  def sorted(query) do
-    from p in query,
-    order_by: [desc: p.inserted_at]
+  def sorted(query \\ Requestbox.Request) do
+    query |> order_by([r], [desc: r.inserted_at])
   end
 end
