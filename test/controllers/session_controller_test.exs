@@ -22,7 +22,7 @@ defmodule Requestbox.SessionControllerTest do
   test "GET Session" do
 
     {:ok, session} = Repo.insert(%Session{})
-    path = conn() |> root_session_path(:show, session)
+    path = conn() |> session_path(:show, session)
     conn = conn()
     |> put_req_header("accepts", "text/html")
     |> get(path)

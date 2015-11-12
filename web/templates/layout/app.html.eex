@@ -21,7 +21,7 @@
           </ul>
         </nav>
         %>
-        <a class="logo" href="<%= root_session_path(@conn, :index) %>"></a>
+        <a class="logo" href="<%= session_path(@conn, :index) %>"></a>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

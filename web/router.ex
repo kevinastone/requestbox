@@ -17,7 +17,8 @@ defmodule Requestbox.Router do
 
   pipeline :parsers do
     plug Plug.Parsers,
-      parsers: [:urlencoded, :multipart]
+      parsers: [:urlencoded, :multipart],
+      pasthrough: ["*/"]
 
   end
 
@@ -30,16 +31,16 @@ defmodule Requestbox.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Requestbox, as: :root do
+  scope "/", Requestbox do
     pipe_through [:parsers, :browser]
 
     get "/", SessionController, :index
     post "/", SessionController, :create
   end
 
-  scope "/:id", Requestbox, as: :root do
+  scope "/", Requestbox do
     pipe_through :browser
-    get "", SessionController, :show
+    get "/:id", SessionController, :show
   end
 
   scope "/req/:session_id", Requestbox do

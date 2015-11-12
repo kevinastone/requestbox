@@ -12,7 +12,7 @@
   <%= for request <- @page.entries do %>
     <%= render "request.html", request: request %>
   <% end %>
-  <%= pagination_links @conn, @page, [@session], path: fn (conn, opts, session, params) -> root_session_path(conn, :show, session, params) end %>
+  <%= pagination_links @conn, @page, [@session], path: fn (conn, _opts, session, params) -> session_path(conn, :show, session, params) end %>
 <% else %>
   <p>Make a request to get started. After making a request, Reload the page to see the updates.</p>
   <h3>cURL</h3>
