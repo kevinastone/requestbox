@@ -4,7 +4,7 @@ defmodule Requestbox.RequestController do
   alias Requestbox.Request
   alias Requestbox.Session
 
-  plug Plug.BearerToken
+  plug Requestbox.BearerToken
   plug :load_session
   plug :query_token
   plug :check_token

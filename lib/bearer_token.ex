@@ -1,4 +1,4 @@
-defmodule Plug.BearerToken do
+defmodule Requestbox.BearerToken do
   import Plug.Conn
 
   def init(_), do: true

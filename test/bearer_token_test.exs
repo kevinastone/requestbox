@@ -1,8 +1,8 @@
-defmodule Plug.BearerTokenTest do
+defmodule Requestbox.BearerTokenTest do
   use ExUnit.Case, async: true
   use Plug.Test
 
-  alias Plug.BearerToken
+  alias Requestbox.BearerToken
 
   @opts BearerToken.init([])
 
