@@ -21,6 +21,8 @@
   "postgrex": {:hex, :postgrex, "0.9.1"},
   "quantum": {:hex, :quantum, "1.5.0"},
   "ranch": {:hex, :ranch, "1.1.0"},
+  "scrivener": {:hex, :scrivener, "1.1.0"},
+  "scrivener_html": {:hex, :scrivener_html, "1.0.0"},
   "sqlite_ecto": {:hex, :sqlite_ecto, "1.0.2"},
   "sqlitex": {:hex, :sqlitex, "0.8.2"},
   "ssl_verify_hostname": {:hex, :ssl_verify_hostname, "1.0.5"},

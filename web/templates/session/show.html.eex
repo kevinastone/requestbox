@@ -7,11 +7,12 @@
   </div>
 </form>
 
-<%= if length(@session.requests) > 0 do %>
+<%= if length(@page.entries) > 0 do %>
   <h2>Requests</h2>
-  <%= for request <- @session.requests do %>
+  <%= for request <- @page.entries do %>
     <%= render "request.html", request: request %>
   <% end %>
+  <%= pagination_links @conn, @page, [@session], path: &request_session_path/4 %>
 <% else %>
   <p>Make a request to get started. After making a request, Reload the page to see the updates.</p>
   <h3>cURL</h3>
