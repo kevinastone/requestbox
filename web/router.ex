@@ -43,25 +43,9 @@ defmodule Requestbox.Router do
   end
 
   scope "/req/:session_id", Requestbox do
+    alias Phoenix.Router.Scope
     forward "", RequestController
-  end
-end
-
-defmodule Requestbox.Router.TokenHelpers do
-
-  def request_path(_conn_or_endpoint, _opts, %Requestbox.Session{:id => session_id}, params \\ []) do
-    path = "/req"
-    path = case session_id do
-      nil -> path
-      session_id -> Enum.join([path, Requestbox.Session.encode(session_id)], "/")
-    end
-    case params do
-      [] -> path
-      params -> path <> "?" <> Plug.Conn.Query.encode(params)
-    end
-  end
-
-  def request_url(conn_or_endpoint, opts, var, params \\ []) do
-    Phoenix.Router.Helpers.url(__MODULE__, conn_or_endpoint) <> request_path(conn_or_endpoint, opts, var, params)
+    # Hack a helper for this route
+    @phoenix_routes Scope.route(__MODULE__, :match, :*, "", RequestController, nil, [])
   end
 end

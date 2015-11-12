@@ -1,6 +1,6 @@
 defmodule Requestbox.RequestControllerTest do
   use Requestbox.ConnCase
-  import Requestbox.Router.TokenHelpers
+  import Requestbox.Router.Helpers
   alias Requestbox.Repo
   alias Requestbox.Request
   alias Requestbox.Session

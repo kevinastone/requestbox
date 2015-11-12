@@ -2,7 +2,7 @@
   <div class="form-group">
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon3">Box URL</span>
-      <input id="sessionUrl" class="form-control" type="text" value="<%= request_url(@conn, :capture, @session) %>" onfocus="setTimeout(function() {select();})">
+      <input id="sessionUrl" class="form-control" type="text" value="<%= request_url(@conn, nil, @session) %>" onfocus="setTimeout(function() {select();})">
     </div>
   </div>
 </form>
@@ -16,5 +16,5 @@
 <% else %>
   <p>Make a request to get started. After making a request, Reload the page to see the updates.</p>
   <h3>cURL</h3>
-  <pre><code>curl -X POST -d "fizz=buzz" <%= request_url(@conn, :capture, @session) %></code></pre>
+  <pre><code>curl -X POST -d "fizz=buzz" <%= request_url(@conn, nil, @session) %></code></pre>
 <% end %>
