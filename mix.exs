@@ -31,12 +31,12 @@ defmodule Requestbox.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.0.3"},
-     {:phoenix_html, "~> 2.2.0"},
+    [{:phoenix, "~> 1.1.0"},
+     {:phoenix_html, "~> 2.5.0"},
      {:phoenix_live_reload, "~> 1.0"},
-     {:phoenix_ecto, "~> 1.1"},
-     {:postgrex, ">= 0.0.0"},
-     {:sqlite_ecto, "~> 1.0.0"},
+     {:phoenix_ecto, "~> 2.0"},
+     {:postgrex, ">= 0.11.0"},
+     {:sqlite_ecto, "~> 1.1.0"},
      {:cowboy, "~> 1.0"},
      {:quantum, ">= 1.5.0"},
      {:poison, "~> 1.5"},
