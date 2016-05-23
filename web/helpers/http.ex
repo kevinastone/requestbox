@@ -22,6 +22,15 @@ defmodule Requestbox.Helpers.HTTP do
     |> Enum.join("-")
   end
 
+  defp _content_type_from_mime(mime_type), do: List.last(String.split(mime_type, "/"))
+
+  def language_content_type(headers, default \\ "html") do
+    case Enum.find(headers, nil, fn header -> header.name == "content-type" end) do
+      %{value: mime_type} -> _content_type_from_mime(mime_type)
+      _ -> default
+    end
+  end
+
   defmacro __using__(_) do
     quote do: import Requestbox.Helpers.HTTP
   end
