@@ -10,14 +10,14 @@
 <dl>
   <%= if hd @request.headers do %>
   <dt>Headers</dt>
-  <dd><pre><%= for header <- @request.headers do %><%= header_case(header.name) %>: <%= header.value %>
-<% end %></pre></dd>
+  <dd><pre><code class="language-http"><%= for header <- @request.headers do %><%= header_case(header.name) %>: <%= header.value %>
+<% end %></code></pre></dd>
   <% end %>
 
   <%= if String.first(@request.body) do %>
   <dt>Body</dt>
   <dd>
-    <pre class="pre-scrollable"><code><%= @request.body %></code></pre>
+    <pre class="pre-scrollable"><code class="language-<%= language_content_type(@request.headers, 'json') %>"><%= @request.body %></code></pre>
   </dd>
   <% end %>
 </dl>
