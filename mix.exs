@@ -43,7 +43,8 @@ defmodule Requestbox.Mixfile do
      {:timex_ecto, "~> 0.5.0"},
      {:hashids, "~> 2.0"},
      {:scrivener, "~> 1.1"},
-     {:scrivener_html, "~> 1.0"}
+     {:scrivener_html, "~> 1.0"},
+     {:credo, "~> 0.3", only: [:dev, :test]}
    ]
   end
 

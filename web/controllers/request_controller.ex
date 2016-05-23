@@ -19,8 +19,8 @@ defmodule Requestbox.RequestController do
     conn = fetch_query_params conn
     case conn.query_params["token"] do
       nil -> conn
-      query_token ->
-        conn = assign(conn, :token, query_token)
+      token ->
+        conn = assign(conn, :token, token)
         remaining_params = Dict.delete(conn.query_params, "token")
         %Plug.Conn{conn | query_string: Plug.Conn.Query.encode(remaining_params), query_params: remaining_params}
     end
@@ -47,9 +47,10 @@ defmodule Requestbox.RequestController do
   end
 
   defp check_token(conn, _) do
-    case _check_token(conn.assigns[:session].token, conn.assigns[:token]) do
-      true -> conn
-      false -> conn |> send_resp(403, "Incorrect token") |> halt
+    if _check_token(conn.assigns[:session].token, conn.assigns[:token]) do
+      conn
+    else
+      conn |> send_resp(403, "Incorrect token") |> halt
     end
   end
 

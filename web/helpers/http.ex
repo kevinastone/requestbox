@@ -16,7 +16,8 @@ defmodule Requestbox.Helpers.HTTP do
 
   def header_case(_header = "dnt"), do: "DNT"
   def header_case(header) do
-    String.split(header, "-")
+    header
+    |> String.split("-")
     |> Enum.map(&String.capitalize/1)
     |> Enum.join("-")
   end

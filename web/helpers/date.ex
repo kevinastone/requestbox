@@ -5,6 +5,7 @@ defmodule Requestbox.Helpers.Date do
     |> Timex.DateFormat.format!(format, :strftime)
   end
 
+  @lint false
   def human_relative_time_from_now(date) do
     now = Timex.Date.now
     cond do
