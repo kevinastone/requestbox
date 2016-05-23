@@ -1,15 +1,16 @@
 {
   "repository": {},
   "dependencies": {
-    "babel-brunch": "^6.0.0",
-    "brunch": "^2.5.0",
-    "clean-css-brunch": ">= 1.0 < 1.8",
-    "commander": "^2.9.0",
-    "css-brunch": ">= 1.0 < 1.8",
-    "javascript-brunch": ">= 1.0 < 1.8",
     "phoenix": "file:deps/phoenix",
-    "phoenix_html": "file:deps/phoenix_html",
+    "phoenix_html": "file:deps/phoenix_html"
+  },
+  "devDependencies": {
+    "babel-brunch": "~6.0.0",
+    "brunch": "2.7.4",
+    "clean-css-brunch": "~2.0.0",
+    "css-brunch": "~2.0.0",
+    "javascript-brunch": "~2.0.0",
     "prismjs": "^1.5.0",
-    "uglify-js-brunch": ">= 1.0 < 1.8"
+    "uglify-js-brunch": "~2.0.1"
   }
 }
