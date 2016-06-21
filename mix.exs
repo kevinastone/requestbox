@@ -32,7 +32,7 @@ defmodule Requestbox.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [{:phoenix, "~> 1.1.0"},
-     {:phoenix_html, "~> 2.5.0"},
+     {:phoenix_html, "~> 2.6.0"},
      {:phoenix_live_reload, "~> 1.0"},
      {:phoenix_ecto, "~> 2.0"},
      {:postgrex, ">= 0.11.0"},
@@ -40,11 +40,11 @@ defmodule Requestbox.Mixfile do
      {:cowboy, "~> 1.0"},
      {:quantum, ">= 1.5.0"},
      {:poison, "~> 1.5"},
-     {:timex_ecto, "~> 0.5.0"},
+     {:timex_ecto, "~> 1.1.0"},
      {:hashids, "~> 2.0"},
-     {:scrivener, "~> 1.1"},
-     {:scrivener_html, "~> 1.0"},
-     {:credo, "~> 0.3", only: [:dev, :test]}
+     {:scrivener, "~> 1.2"},
+     {:scrivener_html, "~> 1.1"},
+     {:credo, "~> 0.4", only: [:dev, :test]}
    ]
   end
 
