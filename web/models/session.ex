@@ -15,7 +15,7 @@ defmodule Requestbox.Session do
   encode_param Session, :id
 
   @required_fields ~w()
-  @optional_fields ~w(requests token)
+  @optional_fields ~w(token)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -23,7 +23,7 @@ defmodule Requestbox.Session do
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
     # When Ecto 2.0 is released:
