@@ -5,11 +5,13 @@ defmodule Plug.XForwardedFor do
 
   def call(conn, _opts) do
     forward_ip = List.first(get_req_header(conn, "x-forwarded-for"))
-    if forward_ip do
-      conn = case :inet.parse_address(to_char_list forward_ip) do
+    conn = if forward_ip do
+      case :inet.parse_address(to_char_list forward_ip) do
         {:ok, ip} -> %Plug.Conn{conn | remote_ip: ip}
         _ -> conn
       end
+    else
+      conn
     end
     conn
   end

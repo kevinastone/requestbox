@@ -3,8 +3,8 @@ defmodule Requestbox.Mixfile do
 
   def project do
     [app: :requestbox,
-     version: "0.0.1",
-     elixir: "~> 1.0",
+     version: "0.1.0",
+     elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -19,7 +19,7 @@ defmodule Requestbox.Mixfile do
   def application do
     [mod: {Requestbox, []},
      applications: [:phoenix, :cowboy, :logger, :quantum,
-                    # :timex, :tzdata,
+                    :timex, :tzdata,
                     :phoenix_html, :phoenix_ecto, :postgrex, :sqlite_ecto]]
   end
 
@@ -31,7 +31,7 @@ defmodule Requestbox.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1.0"},
+    [{:phoenix, "~> 1.1.5"},
      {:phoenix_html, "~> 2.6.0"},
      {:phoenix_live_reload, "~> 1.0"},
      {:phoenix_ecto, "~> 2.0"},

@@ -45,8 +45,8 @@ defmodule Requestbox.Router do
 
   scope "/req/:session_id", Requestbox do
     alias Phoenix.Router.Scope
-    forward "", RequestController
+    forward "/", RequestController
     # Hack a helper for this route
-    @phoenix_routes Scope.route(__MODULE__, :match, :*, "", RequestController, nil, [])
+    @phoenix_routes Scope.route(__MODULE__, :match, :*, "/", RequestController, nil, [])
   end
 end
