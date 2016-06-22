@@ -2,7 +2,11 @@ language: elixir
 elixir:
   - 1.2.0
   - 1.3.0
-
 script:
   - mix test
   - mix credo --strict
+deploy:
+  provider: heroku
+  app: enigmatic-stream-8949
+  api_key:
+    secure: LCt7x13/qxIfGlr69JvlF1zY667dTFPeTAFA663dV62QxkYrCZ+Aj6btD0oN8Gtrlsd8GIxmDXK1QSirjNdY6/Qh4u/rtXUmSCBCmpx1BqDpAW6eTCn4RwRVqoNvAJo0812nF8lBmmYp2ViCDVGBHHlZx3HNDpPPVu0ZSLZTC5cS19eFnjQD8ShI4u+RdoEKy1FiE2r4nOWhGjS5qJDwNk+gHN1tEN2QYrRt1ObbE2x6Gx+Vm8WC1RTsIwFXdHFtcXtxkSVhoLJFXhRjaiHQ4RYmhVSzrVViaIvNAccSXhelexIxyhw1vNe8J/XU6pWZBRzBGJAW7r6IJGkqD/VhwPQ21Id1qrKSd2qXz4c2y0ENMaUrSmDd+tkFQnD7aICTiSoAssx/wWMzR7ad8NFWCi1avcTAC6P0MofVM0DOxOO5qQ/QSmBc71Mvl1UOmDNQ8GgdJq9sEG4yjyWbhHq8+qVpJXWjrvW1QfggowAOlYSXjC9Eku2B+xIb1Sp3T8C/mIazXA4H1+RmNrLMdsFWYuqIygaJn+JtxS2Xe3cf7XLC2A9luh8En3dUzyylsXvODWtK/v+ipK5bTJBcbbejdlSBEz2V7YfdoOdoXoTHu+fCUpw8x8RAonvZcwxF7KJHFsuc9tjGDKoTiEkHHKPdVOZeqDwx67/wuONzkii6nts=
