@@ -1,6 +1,6 @@
 <h3 id="<%= @request.id %>" class="clrfix">
   <span class="label <%= color_method(@request.method) %>"><%= @request.method %></span>
-  <%= @request.path %><%= if String.first(@request.query_string) do %><%= for {{key, value}, index} <- Enum.with_index(URI.query_decoder(@request.query_string)) do %><span class="text-muted"><%= header_separator(index) %></span><kbd><%= key %><%= if value do %>=<%= value %><% end %></kbd><% end %><% end %>
+  <%= @request.path %><%= if String.first(@request.query_string || "") do %><%= for {{key, value}, index} <- Enum.with_index(URI.query_decoder(@request.query_string)) do %><span class="text-muted"><%= header_separator(index) %></span><kbd><%= key %><%= if value do %>=<%= value %><% end %></kbd><% end %><% end %>
   <aside class="pull-right">
     <small><a href="#<%= @request.id %>"><%= human_relative_time_from_now(@request.inserted_at) %></a></small>
     <small><%= if @request.client_ip do %>via <%= @request.client_ip %><% end %></small>
@@ -8,13 +8,13 @@
 </h3>
 
 <dl>
-  <%= if hd @request.headers do %>
+  <%= if List.first(@request.headers || []) do %>
   <dt>Headers</dt>
   <dd><pre><code class="language-http"><%= for header <- @request.headers do %><%= header_case(header.name) %>: <%= header.value %>
 <% end %></code></pre></dd>
   <% end %>
 
-  <%= if String.first(@request.body) do %>
+  <%= if String.first(@request.body || "") do %>
   <dt>Body</dt>
   <dd>
     <pre class="pre-scrollable"><code class="language-<%= language_content_type(@request.headers, 'json') %>"><%= @request.body %></code></pre>

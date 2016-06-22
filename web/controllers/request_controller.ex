@@ -1,7 +1,7 @@
 defmodule Requestbox.RequestController do
   use Requestbox.Web, :controller
 
-  alias Requestbox.Request
+  alias Requestbox.Request.Header
   alias Requestbox.Session
 
   plug Requestbox.BearerToken
@@ -68,10 +68,10 @@ defmodule Requestbox.RequestController do
   def init(_), do: true
 
   def action(conn, _) do
-    headers = Enum.map(conn.req_headers, fn {name, value} -> %Request.Header{name: name, value: value} end)
+    headers = Enum.map(conn.req_headers, fn {name, value} -> %Header{name: name, value: value} end)
     {:ok, body, conn} = get_body(conn)
 
-    changeset = Request.changeset(%Request{}, %{
+    changeset = Ecto.build_assoc(conn.assigns[:session], :requests, %{
       session_id: conn.assigns[:session].id,
       method: conn.method,
       client_ip: to_string(:inet.ntoa(conn.remote_ip)),
