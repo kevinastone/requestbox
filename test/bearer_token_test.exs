@@ -9,7 +9,7 @@ defmodule Requestbox.BearerTokenTest do
   test "Extracts Bearer Token" do
     conn = conn(:get, "/hello")
     |> put_req_header("authorization", "Bearer abcd")
-    conn = BearerToken.call(conn, @opts)
+    |> BearerToken.call(@opts)
 
     assert conn.assigns[:token] == "abcd"
   end
@@ -17,13 +17,13 @@ defmodule Requestbox.BearerTokenTest do
   test "Error on Invalid Authorization Header" do
     conn = conn(:get, "/hello")
     |> put_req_header("authorization", "abcd")
-    conn = BearerToken.call(conn, @opts)
+    |> BearerToken.call(@opts)
     assert conn.status == 401
   end
 
   test "Noop without Bearer Token" do
     conn = conn(:get, "/hello")
-    conn = BearerToken.call(conn, @opts)
+    |> BearerToken.call(@opts)
 
     refute conn.assigns[:token]
   end
