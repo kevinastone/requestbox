@@ -6,12 +6,12 @@ defmodule Requestbox.Mixfile do
      version: "0.1.0",
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
-     elixirc_options: [warnings_as_errors: true],
+     elixirc_options: [warnings_as_errors: false],
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application.

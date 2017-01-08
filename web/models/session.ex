@@ -9,7 +9,7 @@ defmodule Requestbox.Session do
 
     field :token, :string
     has_many :requests, Requestbox.Request, on_delete: :delete_all
-    timestamps
+    timestamps()
   end
 
   encode_param Session, :id

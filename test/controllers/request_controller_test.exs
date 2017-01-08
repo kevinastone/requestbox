@@ -18,12 +18,12 @@ defmodule Requestbox.RequestControllerTest do
   end
 
   setup context do
-    context = Dict.put context, :session, _session()
+    context = Map.put context, :session, _session()
     {:ok, context}
   end
 
   setup context do
-    context = Dict.put context, :path, conn() |> request_path(nil, context.session)
+    context = Map.put context, :path, conn() |> request_path(nil, context.session)
     {:ok, context}
   end
 
@@ -49,7 +49,7 @@ defmodule Requestbox.RequestControllerTest do
   test "Request with Token without credentials" do
     session = _session(%Session{token: "abcd"})
     path = request_path(conn(), nil, session)
-    conn
+    conn()
     |> get(path)
     |> response(403)
   end
@@ -57,7 +57,7 @@ defmodule Requestbox.RequestControllerTest do
   test "Request with Token with header credentials" do
     session = _session(%Session{token: "abcd"})
     path = request_path(conn(), nil, session)
-    conn
+    conn()
     |> put_req_header("authorization", "Bearer abcd")
     |> get(path)
     |> response(200)
@@ -66,7 +66,7 @@ defmodule Requestbox.RequestControllerTest do
   test "Request with Token with invalid header credentials" do
     session = _session(%Session{token: "abcd"})
     path = request_path(conn(), nil, session)
-    conn
+    conn()
     |> put_req_header("authorization", "Bearer xyz")
     |> get(path)
     |> response(403)
@@ -75,7 +75,7 @@ defmodule Requestbox.RequestControllerTest do
   test "Request with Token with query credentials" do
     session = _session(%Session{token: "abcd"})
     path = request_path(conn(), nil, session, token: "abcd")
-    conn
+    conn()
     |> get(path)
     |> response(200)
   end
@@ -83,7 +83,7 @@ defmodule Requestbox.RequestControllerTest do
   test "Request with Token with invalid query credentials" do
     session = _session(%Session{token: "abcd"})
     path = request_path(conn(), nil, session, token: "xyz")
-    conn
+    conn()
     |> get(path)
     |> response(403)
   end

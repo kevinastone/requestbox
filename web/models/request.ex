@@ -53,7 +53,7 @@ defmodule Requestbox.Request do
     field :body, :string
 
     belongs_to :session, Session
-    timestamps
+    timestamps()
   end
 
   encode_param Requestbox.Request, :session_id, &Session.encode/1

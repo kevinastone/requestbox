@@ -21,7 +21,7 @@ defmodule Requestbox.RequestController do
       nil -> conn
       token ->
         conn = assign(conn, :token, token)
-        remaining_params = Dict.delete(conn.query_params, "token")
+        remaining_params = Map.delete(conn.query_params, "token")
         %Plug.Conn{conn | query_string: Plug.Conn.Query.encode(remaining_params), query_params: remaining_params}
     end
   end

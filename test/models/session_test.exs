@@ -3,9 +3,6 @@ defmodule Requestbox.SessionTest do
 
   alias Requestbox.Session
 
-  @valid_attrs %{token: "abcd"}
-  @invalid_attrs %{token: "ab"}
-
   test "changeset without token" do
     changeset = Session.changeset(%Session{}, %{})
     assert(changeset.valid?, inspect(changeset.errors))
