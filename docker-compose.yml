@@ -1,0 +1,25 @@
+version: '2'
+services:
+  web:
+    build: .
+    depends_on: ['db']
+    ports:
+      - "80:80"
+    hostname: requestbox
+    domainname: localhost
+    environment:
+      DATABASE_URL: postgres://requestbox:changeme@db/requestbox?sslmode=disable
+      SECRET_KEY_BASE: bbe5c9bc68b1f64ffd82bd852c96bf631dfbb77e50a67aadb235774381c21104e0b499b1d21afacd6b9ee5a9ebc28a1d30269cae307a0e22fd6bbcff4389e4fd
+  db:
+    image: postgres
+    volumes:
+      - database:/database
+    environment:
+      POSTGRES_DB: requestbox
+      POSTGRES_USER: requestbox
+      POSTGRES_PASSWORD: changeme
+      PGDATA: /database
+    restart: on-failure:10
+volumes:
+  database:
+    driver: local
