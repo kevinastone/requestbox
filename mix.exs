@@ -42,7 +42,7 @@ defmodule Requestbox.Mixfile do
      {:cowboy, "~> 1.0"},
      {:quantum, ">= 1.5.0"},
      {:poison, "~> 2.2"},
-     {:timex_ecto, "~> 1.1.0"},
+     {:timex_ecto, "~> 3.0"},
      {:hashids, "~> 2.0"},
      {:scrivener, "~> 2.0"},
      {:scrivener_html, "~> 1.1"},

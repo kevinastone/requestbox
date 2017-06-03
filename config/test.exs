@@ -15,3 +15,5 @@ config :requestbox, Requestbox.Repo,
   database: "test.sqlite3",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :requestbox, sql_sandbox: true

@@ -37,7 +37,6 @@ defmodule Requestbox.Request do
   end
 
   use Requestbox.Web, :model
-  use Timex.Ecto.Timestamps
   use Requestbox.HashID
 
   alias Requestbox.Request.Headers
@@ -58,7 +57,7 @@ defmodule Requestbox.Request do
 
   encode_param Requestbox.Request, :session_id, &Session.encode/1
 
-  @required_fields ~w(session_id method path)
+  @required_fields ~w(method path)
   @optional_fields ~w(client_ip headers body query_string)
 
   @doc """
@@ -69,7 +68,9 @@ defmodule Requestbox.Request do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> cast_assoc(:session)
+    |> validate_required(@required_fields)
   end
 
   def sorted(query \\ Requestbox.Request) do
