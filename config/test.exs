@@ -11,7 +11,7 @@ config :logger, level: :warn
 
 # Configure your database
 config :requestbox, Requestbox.Repo,
-  adapter: Sqlite.Ecto,
+  adapter: Sqlite.Ecto2,
   database: "test.sqlite3",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

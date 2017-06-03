@@ -21,7 +21,7 @@ defmodule Requestbox.Mixfile do
     [mod: {Requestbox, []},
      applications: [:phoenix, :cowboy, :logger, :quantum,
                     :timex, :tzdata,
-                    :phoenix_html, :phoenix_ecto, :postgrex, :sqlite_ecto2]]
+                    :phoenix_html, :scrivener_ecto, :phoenix_ecto, :postgrex, :sqlite_ecto2]]
   end
 
   # Specifies which paths to compile per environment.
@@ -43,8 +43,9 @@ defmodule Requestbox.Mixfile do
      {:quantum, ">= 1.5.0"},
      {:poison, "~> 2.2"},
      {:timex_ecto, "~> 3.0"},
+     {:timex, "~> 3.1.13"},
      {:hashids, "~> 2.0"},
-     {:scrivener, "~> 2.0"},
+     {:scrivener_ecto, "~> 1.0"},
      {:scrivener_html, "~> 1.1"},
      {:credo, "~> 0.4", only: [:dev, :test]}
    ]
@@ -59,6 +60,7 @@ defmodule Requestbox.Mixfile do
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.create", "ecto.migrate", "test"]]
+     "test": ["ecto.create", "ecto.migrate", "test"],
+     "run": ["ecto.setup", "phoenix.server"]]
   end
 end

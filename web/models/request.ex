@@ -1,6 +1,7 @@
 defmodule Requestbox.Request do
 
   defmodule Header do
+    @derive [Poison.Encoder]
     defstruct [:name, :value]
 
     defmodule Type do
@@ -57,17 +58,17 @@ defmodule Requestbox.Request do
 
   encode_param Requestbox.Request, :session_id, &Session.encode/1
 
-  @required_fields ~w(method path)
-  @optional_fields ~w(client_ip headers body query_string)
+  @required_fields [:method, :path]
+  @optional_fields [:client_ip, :headers, :body, :query_string]
 
   @doc """
-  Creates a changeset based on the `model` and `params`.
+  Creates a changeset based on the `struct` and `params`.
 
   If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
-  def changeset(model, params \\ %{}) do
-    model
+  def changeset(struct, params \\ %{}) do
+    struct
     |> cast(params, @required_fields ++ @optional_fields)
     |> cast_assoc(:session)
     |> validate_required(@required_fields)

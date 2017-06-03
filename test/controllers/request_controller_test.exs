@@ -96,7 +96,7 @@ defmodule Requestbox.RequestControllerTest do
     assert request.session_id == context.session.id
     assert request.method == "GET"
     assert request.path == context.path
-    assert request.headers == [%Request.Header{name: "x-header", value: "value"}]
+    assert request.headers == [%{"name" => "x-header", "value" => "value"}]
   end
 
   test "Capture client ip request", context do

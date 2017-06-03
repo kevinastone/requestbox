@@ -13,8 +13,8 @@ defmodule Requestbox.Session do
 
   encode_param Session, :id
 
-  @required_fields ~w()
-  @optional_fields ~w(token)
+  @required_fields []
+  @optional_fields [:token]
 
   @doc """
   Creates a changeset based on the `model` and `params`.
