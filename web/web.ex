@@ -64,7 +64,7 @@ defmodule Requestbox.Web do
 
       alias Requestbox.Repo
       import Ecto
-      import Ecto.Query, only: [from: 1, from: 2]
+      import Ecto.Query
     end
   end
 

@@ -32,3 +32,5 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+config :requestbox, ecto_repos: [Requestbox.Repo]
