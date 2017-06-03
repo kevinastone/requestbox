@@ -7,14 +7,14 @@ defmodule Requestbox.Helpers.HTTP do
   def color_method("DELETE"), do: "label-danger"
   def color_method(_), do: "label-default"
 
-  def header_separator(_index = 0), do: "?"
+  def header_separator(0 = _index), do: "?"
   def header_separator(_index), do: "&"
 
   def query_parts(query_string) do
     URI.query_decoder(query_string)
   end
 
-  def header_case(_header = "dnt"), do: "DNT"
+  def header_case("dnt" = _header), do: "DNT"
   def header_case(header) do
     header
     |> String.split("-")
