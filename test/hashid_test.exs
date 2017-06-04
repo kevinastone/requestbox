@@ -1,5 +1,5 @@
 defmodule Requestbox.HashIDTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   defmodule TestModule do
     use Requestbox.HashID, salt: "abcd"

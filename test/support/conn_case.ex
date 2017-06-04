@@ -4,7 +4,7 @@ defmodule Requestbox.ConnCase do
   tests that require setting up a connection.
 
   Such tests rely on `Phoenix.ConnTest` and also
-  imports other functionality to make it easier
+  import other functionality to make it easier
   to build and query models.
 
   Finally, if the test case interacts with the database,
@@ -21,6 +21,8 @@ defmodule Requestbox.ConnCase do
       use Phoenix.ConnTest
 
       alias Requestbox.Repo
+      import Ecto
+      import Ecto.Changeset
       import Ecto.Query
 
       import Requestbox.Router.Helpers
@@ -32,10 +34,11 @@ defmodule Requestbox.ConnCase do
 
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Requestbox.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Requestbox.Repo, {:shared, self()})
     end
 
-    :ok
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

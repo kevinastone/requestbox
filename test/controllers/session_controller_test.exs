@@ -1,5 +1,5 @@
 defmodule Requestbox.SessionControllerTest do
-  use Requestbox.ConnCase
+  use Requestbox.ConnCase, async: true
 
   alias Requestbox.Repo
   alias Requestbox.Session

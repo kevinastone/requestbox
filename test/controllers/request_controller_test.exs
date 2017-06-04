@@ -1,5 +1,5 @@
 defmodule Requestbox.RequestControllerTest do
-  use Requestbox.ConnCase
+  use Requestbox.ConnCase, async: true
   import Requestbox.Router.Helpers
   alias Requestbox.Repo
   alias Requestbox.Request
