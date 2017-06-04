@@ -33,6 +33,10 @@ defmodule Requestbox.ChannelCase do
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Requestbox.Repo)
 
+    on_exit fn ->
+      Ecto.Adapters.SQL.Sandbox.checkin(Requestbox.Repo, [])
+    end
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Requestbox.Repo, {:shared, self()})
     end

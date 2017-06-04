@@ -36,7 +36,6 @@ defmodule Requestbox.Mixfile do
   defp deps do
     [{:phoenix, "~> 1.2.4"},
      {:phoenix_html, "~> 2.6"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:ecto, "~> 2.1"},
      {:phoenix_ecto, "~> 3.0"},
      {:postgrex, "~> 0.13"},
@@ -50,7 +49,10 @@ defmodule Requestbox.Mixfile do
      {:hashids, "~> 2.0"},
      {:scrivener_ecto, "~> 1.0"},
      {:scrivener_html, "~> 1.7"},
-     {:credo, "~> 0.4", only: [:dev, :test]}
+     {:credo, "~> 0.4", only: [:dev, :test]},
+     {:ex_machina, "~> 2.0", only: :test},
+     {:faker, "~> 0.8", only: :test},
+     {:phoenix_live_reload, "~> 1.0", only: :dev}
    ]
   end
 

@@ -1,7 +1,6 @@
 defmodule Requestbox.Request do
 
   defmodule Header do
-    @derive [Poison.Encoder]
     defstruct [:name, :value]
 
     defmodule Type do
@@ -14,7 +13,7 @@ defmodule Requestbox.Request do
       def cast(%Header{} = header), do: header
       def cast(%{} = header), do: struct(Header, header)
 
-      def load(value), do: Poison.decode(value, as: Header)
+      def load(value), do: Poison.decode(value, as: %Header{})
       def dump(value), do: Poison.encode(value)
     end
   end
@@ -32,7 +31,7 @@ defmodule Requestbox.Request do
       end
       def cast(_other), do: :error
 
-      def load(value), do: Poison.decode(value, as: [Header])
+      def load(value), do: Poison.decode(value, as: [%Header{}])
       def dump(value), do: Poison.encode(value)
     end
   end

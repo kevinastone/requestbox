@@ -10,7 +10,7 @@
 <dl>
   <%= if List.first(@request.headers || []) do %>
   <dt>Headers</dt>
-  <dd><pre><code class="language-http"><%= for header <- @request.headers do %><%= header_case(header["name"]) %>: <%= header["value"] %>
+  <dd><pre><code class="language-http"><%= for header <- @request.headers do %><%= header_case(header.name) %>: <%= header.value %>
 <% end %></code></pre></dd>
   <% end %>
 

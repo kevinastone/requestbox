@@ -26,6 +26,7 @@ defmodule Requestbox.ConnCase do
       import Ecto.Query
 
       import Requestbox.Router.Helpers
+      import Requestbox.Factory
 
       # The default endpoint for testing
       @endpoint Requestbox.Endpoint
@@ -34,6 +35,10 @@ defmodule Requestbox.ConnCase do
 
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Requestbox.Repo)
+
+    on_exit fn ->
+      Ecto.Adapters.SQL.Sandbox.checkin(Requestbox.Repo, [])
+    end
 
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Requestbox.Repo, {:shared, self()})
