@@ -31,21 +31,21 @@ defmodule Requestbox.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Requestbox do
+  scope "/" do
     pipe_through [:parsers, :browser]
 
-    get "/", SessionController, :index
-    post "/", SessionController, :create
+    get "/", Requestbox.SessionController, :index
+    post "/", Requestbox.SessionController, :create
   end
 
-  scope "/", Requestbox do
+  scope "/" do
     pipe_through :browser
-    get "/:id", SessionController, :show
+    get "/:id", Requestbox.SessionController, :show
   end
 
-  scope "/req/:session_id", Requestbox do
+  scope "/req/:session_id" do
     alias Phoenix.Router.Scope
-    forward "/", RequestController
+    forward "/", Requestbox.RequestController
     # Hack a helper for this route
     @phoenix_routes Scope.route(__MODULE__, :match, :get, "/", RequestController, nil, [])
   end

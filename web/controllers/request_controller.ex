@@ -1,5 +1,7 @@
 defmodule Requestbox.RequestController do
-  use Requestbox.Web, :controller
+  # use Requestbox.Web, :controller
+  use Plug.Builder
+  alias Requestbox.Repo
 
   alias Requestbox.Request.Header
   alias Requestbox.Session
@@ -8,6 +10,7 @@ defmodule Requestbox.RequestController do
   plug :load_session
   plug :query_token
   plug :check_token
+  plug :action
 
   defp load_session(conn, _) do
     session_id = List.last conn.script_name

@@ -12,7 +12,7 @@ defmodule Requestbox.Repo.Migrations.CreateRequest do
       add :body, :text
       add :session_id, references(:sessions)
 
-      timestamps
+      timestamps()
     end
 
   end

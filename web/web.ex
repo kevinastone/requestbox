@@ -19,6 +19,7 @@ defmodule Requestbox.Web do
   def model do
     quote do
       use Ecto.Schema
+      # use Timex.Ecto.Timestamps
 
       import Ecto
       import Ecto.Changeset
@@ -35,6 +36,7 @@ defmodule Requestbox.Web do
       import Ecto.Query
 
       import Requestbox.Router.Helpers
+      import Requestbox.Gettext
     end
   end
 
@@ -49,6 +51,8 @@ defmodule Requestbox.Web do
       use Phoenix.HTML
 
       import Requestbox.Router.Helpers
+      import Requestbox.ErrorHelpers
+      import Requestbox.Gettext
     end
   end
 
@@ -64,7 +68,7 @@ defmodule Requestbox.Web do
 
       alias Requestbox.Repo
       import Ecto
-      import Ecto.Query, only: [from: 1, from: 2]
+      import Ecto.Query
     end
   end
 

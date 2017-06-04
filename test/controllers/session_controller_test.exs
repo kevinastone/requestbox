@@ -1,29 +1,29 @@
 defmodule Requestbox.SessionControllerTest do
-  use Requestbox.ConnCase
+  use Requestbox.ConnCase, async: true
 
   alias Requestbox.Repo
   alias Requestbox.Session
 
   test "GET /" do
-    conn = get conn(), "/"
+    conn = get build_conn(), "/"
     assert html_response(conn, 200)
   end
 
   test "Create Session" do
-    conn = post conn(), "/", %{"session" => %{}}
+    conn = post build_conn(), "/", %{"session" => %{}}
     assert redirected_to(conn)
   end
 
   test "Create Session with token" do
-    conn = post conn(), "/", %{"session" => %{"token" => "abcd"}}
+    conn = post build_conn(), "/", %{"session" => %{"token" => "abcd"}}
     assert redirected_to(conn)
   end
 
   test "GET Session" do
 
     {:ok, session} = Repo.insert(%Session{})
-    path = conn() |> session_path(:show, session)
-    conn = conn()
+    path = build_conn() |> session_path(:show, session)
+    conn = build_conn()
     |> put_req_header("accepts", "text/html")
     |> get(path)
     assert html_response(conn, 200)
@@ -33,8 +33,8 @@ defmodule Requestbox.SessionControllerTest do
 
     {:ok, session} = Repo.insert(%Session{})
     Repo.insert(Ecto.build_assoc(session, :requests, %{method: "GET", path: "/something"}))
-    path = conn() |> session_path(:show, session)
-    conn = conn()
+    path = build_conn() |> session_path(:show, session)
+    conn = build_conn()
     |> put_req_header("accepts", "text/html")
     |> get(path)
     assert html_response(conn, 200)

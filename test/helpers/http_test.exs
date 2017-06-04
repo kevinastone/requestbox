@@ -1,6 +1,5 @@
 defmodule Requestbox.Helpers.HTTPTest do
-  use ExUnit.Case, async: true
-  use Requestbox.ConnCase
+  use Requestbox.ConnCase, async: true
 
   alias Requestbox.Helpers.HTTP
 

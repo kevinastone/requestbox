@@ -1,5 +1,5 @@
 defmodule Requestbox.RequestTest do
-  use Requestbox.ModelCase
+  use Requestbox.ModelCase, async: true
 
   alias Requestbox.Request
 

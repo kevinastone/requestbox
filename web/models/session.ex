@@ -1,6 +1,5 @@
 defmodule Requestbox.Session do
   use Requestbox.Web, :model
-  use Timex.Ecto.Timestamps
   use Requestbox.HashID
 
   alias Requestbox.Session
@@ -14,8 +13,8 @@ defmodule Requestbox.Session do
 
   encode_param Session, :id
 
-  @required_fields ~w()
-  @optional_fields ~w(token)
+  @required_fields []
+  @optional_fields [:token]
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -25,10 +24,8 @@ defmodule Requestbox.Session do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
-    # When Ecto 2.0 is released:
-    # |> cast(params, @required_fields ++ @optional_fields)
-    # |> validate_required(@required_fields)
+    |> cast(params, @required_fields ++ @optional_fields)
+    |> validate_required(@required_fields)
     |> validate_length(:token, min: 4)
   end
 end

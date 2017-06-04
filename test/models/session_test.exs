@@ -1,5 +1,5 @@
 defmodule Requestbox.SessionTest do
-  use Requestbox.ModelCase
+  use Requestbox.ModelCase, async: true
 
   alias Requestbox.Session
 

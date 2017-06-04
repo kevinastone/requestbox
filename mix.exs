@@ -7,7 +7,7 @@ defmodule Requestbox.Mixfile do
      elixir: "~> 1.2",
      elixirc_paths: elixirc_paths(Mix.env),
      elixirc_options: [warnings_as_errors: false],
-     compilers: [:phoenix] ++ Mix.compilers,
+     compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases(),
@@ -19,9 +19,11 @@ defmodule Requestbox.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Requestbox, []},
-     applications: [:phoenix, :cowboy, :logger, :quantum,
-                    :timex, :tzdata,
-                    :phoenix_html, :phoenix_ecto, :postgrex, :sqlite_ecto]]
+     applications: [:cowboy, :logger, :quantum,
+                    :timex, :tzdata, :gettext,
+                    :phoenix, :phoenix_html, :phoenix_ecto,
+                    :scrivener_ecto, :scrivener_html,
+                    :ecto, :postgrex, :sqlite_ecto2]]
   end
 
   # Specifies which paths to compile per environment.
@@ -32,20 +34,22 @@ defmodule Requestbox.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1.5"},
-     {:phoenix_html, "~> 2.6.0"},
-     {:phoenix_live_reload, "~> 1.0"},
-     {:ecto, ">= 1.1.2"},
-     {:phoenix_ecto, "~> 2.0"},
-     {:postgrex, ">= 0.10.0"},
-     {:sqlite_ecto, "~> 1.1.0"},
+    [{:phoenix, "~> 1.2.4"},
+     {:phoenix_html, "~> 2.6"},
+     {:phoenix_live_reload, "~> 1.0", only: :dev},
+     {:ecto, "~> 2.1"},
+     {:phoenix_ecto, "~> 3.0"},
+     {:postgrex, "~> 0.13"},
+     {:sqlite_ecto2, "~> 2.0.0-dev.7"},
+     {:gettext, "~> 0.11"},
      {:cowboy, "~> 1.0"},
      {:quantum, ">= 1.5.0"},
-     {:poison, "~> 1.5"},
-     {:timex_ecto, "~> 1.1.0"},
+     {:poison, "~> 2.2"},
+     {:timex_ecto, "~> 3.0"},
+     {:timex, "~> 3.1.13"},
      {:hashids, "~> 2.0"},
-     {:scrivener, "~> 1.2"},
-     {:scrivener_html, "~> 1.1"},
+     {:scrivener_ecto, "~> 1.0"},
+     {:scrivener_html, "~> 1.7"},
      {:credo, "~> 0.4", only: [:dev, :test]}
    ]
   end
@@ -58,6 +62,8 @@ defmodule Requestbox.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+     "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "test": ["ecto.create --quiet", "ecto.migrate", "test"],
+     "runserver": ["ecto.setup", "phoenix.server"]]
   end
 end
