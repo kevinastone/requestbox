@@ -23,7 +23,7 @@ defmodule Requestbox.RequestControllerTest do
   end
 
   setup context do
-    context = Map.put context, :path, conn() |> request_path(nil, context.session)
+    context = Map.put context, :path, build_conn() |> request_path(nil, context.session)
     {:ok, context}
   end
 
@@ -37,9 +37,9 @@ defmodule Requestbox.RequestControllerTest do
   end
 
   test "GET unknown request" do
-    path = request_path(conn(), nil, %Session{id: 9999})
+    path = request_path(build_conn(), nil, %Session{id: 9999})
     try do
-      conn = get(conn(), path)
+      conn = get(build_conn(), path)
       assert text_response(conn, 404)
     rescue
       Ecto.NoResultsError -> true
@@ -48,16 +48,16 @@ defmodule Requestbox.RequestControllerTest do
 
   test "Request with Token without credentials" do
     session = _session(%Session{token: "abcd"})
-    path = request_path(conn(), nil, session)
-    conn()
+    path = request_path(build_conn(), nil, session)
+    build_conn()
     |> get(path)
     |> response(403)
   end
 
   test "Request with Token with header credentials" do
     session = _session(%Session{token: "abcd"})
-    path = request_path(conn(), nil, session)
-    conn()
+    path = request_path(build_conn(), nil, session)
+    build_conn()
     |> put_req_header("authorization", "Bearer abcd")
     |> get(path)
     |> response(200)
@@ -65,8 +65,8 @@ defmodule Requestbox.RequestControllerTest do
 
   test "Request with Token with invalid header credentials" do
     session = _session(%Session{token: "abcd"})
-    path = request_path(conn(), nil, session)
-    conn()
+    path = request_path(build_conn(), nil, session)
+    build_conn()
     |> put_req_header("authorization", "Bearer xyz")
     |> get(path)
     |> response(403)
@@ -74,22 +74,22 @@ defmodule Requestbox.RequestControllerTest do
 
   test "Request with Token with query credentials" do
     session = _session(%Session{token: "abcd"})
-    path = request_path(conn(), nil, session, token: "abcd")
-    conn()
+    path = request_path(build_conn(), nil, session, token: "abcd")
+    build_conn()
     |> get(path)
     |> response(200)
   end
 
   test "Request with Token with invalid query credentials" do
     session = _session(%Session{token: "abcd"})
-    path = request_path(conn(), nil, session, token: "xyz")
-    conn()
+    path = request_path(build_conn(), nil, session, token: "xyz")
+    build_conn()
     |> get(path)
     |> response(403)
   end
 
   test "Capture header request", context do
-    request = conn(:get, context.path)
+    request = build_conn(:get, context.path)
     |> put_req_header("x-header", "value")
     |> make_request
 
@@ -100,7 +100,7 @@ defmodule Requestbox.RequestControllerTest do
   end
 
   test "Capture client ip request", context do
-    conn = conn(:get, context.path)
+    conn = build_conn(:get, context.path)
     request = conn
     |> make_request
 
@@ -111,7 +111,7 @@ defmodule Requestbox.RequestControllerTest do
   test "Capture POST request", context do
     body = ~s({"key": "value"})
 
-    request = conn(:post, context.path)
+    request = build_conn(:post, context.path)
     |> put_req_header("content-type", "application/json")
     |> make_request(body)
 

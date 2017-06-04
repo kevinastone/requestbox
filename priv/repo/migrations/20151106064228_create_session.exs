@@ -4,7 +4,7 @@ defmodule Requestbox.Repo.Migrations.CreateSession do
   def change do
     create table(:sessions) do
 
-      timestamps
+      timestamps()
     end
 
   end

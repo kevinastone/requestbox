@@ -36,6 +36,7 @@ defmodule Requestbox.Web do
       import Ecto.Query
 
       import Requestbox.Router.Helpers
+      import Requestbox.Gettext
     end
   end
 
@@ -50,6 +51,8 @@ defmodule Requestbox.Web do
       use Phoenix.HTML
 
       import Requestbox.Router.Helpers
+      import Requestbox.ErrorHelpers
+      import Requestbox.Gettext
     end
   end
 

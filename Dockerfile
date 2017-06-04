@@ -29,5 +29,3 @@ ADD web ./web
 RUN mix compile
 ADD priv ./priv
 RUN mix phoenix.digest
-
-CMD ["mix", "run"]

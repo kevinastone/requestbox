@@ -5,6 +5,10 @@
 # is restricted to this project.
 use Mix.Config
 
+# General application configuration
+config :requestbox,
+  ecto_repos: [Requestbox.Repo]
+
 # Configures the endpoint
 config :requestbox, Requestbox.Endpoint,
   url: [host: "localhost"],
@@ -22,7 +26,7 @@ config :hashids,
   salt: "DtALrFb9ZQAghcOrxeE1azn6y5kf3OuZ"
 
 config :scrivener_html,
-  routes_helper: Requestbin.Router.Helpers
+  routes_helper: Requestbox.Router.Helpers
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
@@ -32,5 +36,3 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
-
-config :requestbox, ecto_repos: [Requestbox.Repo]
