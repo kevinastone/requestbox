@@ -3,22 +3,9 @@ defmodule Requestbox.RequestControllerTest do
   import Requestbox.Router.Helpers
   alias Requestbox.Repo
   alias Requestbox.Request
-  alias Requestbox.Session
-
-  def _session do
-    case Repo.insert(%Session{}) do
-      {:ok, session} -> session
-    end
-  end
-
-  def _session(%Session{} = session) do
-    case Repo.insert(session) do
-      {:ok, session} -> session
-    end
-  end
 
   setup context do
-    context = Map.put context, :session, _session()
+    context = Map.put context, :session, insert(:session)
     {:ok, context}
   end
 
@@ -37,7 +24,8 @@ defmodule Requestbox.RequestControllerTest do
   end
 
   test "GET unknown request" do
-    path = request_path(build_conn(), nil, %Session{id: 9999})
+    session = build(:session, id: 9999)
+    path = request_path(build_conn(), nil, session)
     try do
       conn = get(build_conn(), path)
       assert text_response(conn, 404)
@@ -47,7 +35,9 @@ defmodule Requestbox.RequestControllerTest do
   end
 
   test "Request with Token without credentials" do
-    session = _session(%Session{token: "abcd"})
+    session = build(:session)
+    |> with_token("abcd")
+    |> insert()
     path = request_path(build_conn(), nil, session)
     build_conn()
     |> get(path)
@@ -55,7 +45,9 @@ defmodule Requestbox.RequestControllerTest do
   end
 
   test "Request with Token with header credentials" do
-    session = _session(%Session{token: "abcd"})
+    session = build(:session)
+    |> with_token("abcd")
+    |> insert()
     path = request_path(build_conn(), nil, session)
     build_conn()
     |> put_req_header("authorization", "Bearer abcd")
@@ -64,7 +56,9 @@ defmodule Requestbox.RequestControllerTest do
   end
 
   test "Request with Token with invalid header credentials" do
-    session = _session(%Session{token: "abcd"})
+    session = build(:session)
+    |> with_token("abcd")
+    |> insert()
     path = request_path(build_conn(), nil, session)
     build_conn()
     |> put_req_header("authorization", "Bearer xyz")
@@ -73,7 +67,9 @@ defmodule Requestbox.RequestControllerTest do
   end
 
   test "Request with Token with query credentials" do
-    session = _session(%Session{token: "abcd"})
+    session = build(:session)
+    |> with_token("abcd")
+    |> insert()
     path = request_path(build_conn(), nil, session, token: "abcd")
     build_conn()
     |> get(path)
@@ -81,7 +77,9 @@ defmodule Requestbox.RequestControllerTest do
   end
 
   test "Request with Token with invalid query credentials" do
-    session = _session(%Session{token: "abcd"})
+    session = build(:session)
+    |> with_token("abcd")
+    |> insert()
     path = request_path(build_conn(), nil, session, token: "xyz")
     build_conn()
     |> get(path)
