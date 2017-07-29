@@ -34,7 +34,7 @@ defmodule Requestbox.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.2.4"},
+    [{:phoenix, "~> 1.3.0"},
      {:phoenix_html, "~> 2.6"},
      {:ecto, "~> 2.1"},
      {:phoenix_ecto, "~> 3.0"},
