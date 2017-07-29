@@ -1,6 +1,6 @@
-defmodule Requestbox.RequestControllerTest do
-  use Requestbox.ConnCase, async: true
-  import Requestbox.Router.Helpers
+defmodule RequestboxWeb.RequestControllerTest do
+  use RequestboxWeb.ConnCase, async: true
+  import RequestboxWeb.Router.Helpers
   alias Requestbox.Repo
   alias Requestbox.Request
 

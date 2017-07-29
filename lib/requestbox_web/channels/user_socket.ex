@@ -1,4 +1,4 @@
-defmodule Requestbox.UserSocket do
+defmodule RequestboxWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels

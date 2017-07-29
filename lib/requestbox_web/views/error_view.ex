@@ -1,4 +1,4 @@
-defmodule Requestbox.ErrorView do
+defmodule RequestboxWeb.ErrorView do
   use Requestbox.Web, :view
 
   def render("404.html", _assigns) do

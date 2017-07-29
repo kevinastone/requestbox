@@ -1,4 +1,4 @@
-defmodule Requestbox.ErrorHelpers do
+defmodule RequestboxWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """

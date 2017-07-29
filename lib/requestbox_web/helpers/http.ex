@@ -1,4 +1,4 @@
-defmodule Requestbox.Helpers.HTTP do
+defmodule RequestboxWeb.Helpers.HTTP do
 
   def color_method("GET"), do: "label-success"
   def color_method("POST"), do: "label-primary"
@@ -32,6 +32,6 @@ defmodule Requestbox.Helpers.HTTP do
   end
 
   defmacro __using__(_) do
-    quote do: import Requestbox.Helpers.HTTP
+    quote do: import RequestboxWeb.Helpers.HTTP
   end
 end

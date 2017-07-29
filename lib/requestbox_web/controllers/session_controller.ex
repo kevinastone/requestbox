@@ -1,4 +1,4 @@
-defmodule Requestbox.SessionController do
+defmodule RequestboxWeb.SessionController do
   use Requestbox.Web, :controller
 
   alias Requestbox.Request

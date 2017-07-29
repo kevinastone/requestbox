@@ -1,5 +1,5 @@
-defmodule Requestbox.SessionControllerTest do
-  use Requestbox.ConnCase, async: true
+defmodule RequestboxWeb.SessionControllerTest do
+  use RequestboxWeb.ConnCase, async: true
 
   test "GET /" do
     conn = get build_conn(), "/"

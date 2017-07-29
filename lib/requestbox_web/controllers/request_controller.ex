@@ -1,4 +1,4 @@
-defmodule Requestbox.RequestController do
+defmodule RequestboxWeb.RequestController do
   # use Requestbox.Web, :controller
   use Plug.Builder
   alias Requestbox.Repo
