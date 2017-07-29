@@ -1,7 +1,7 @@
-defmodule Requestbox.Helpers.HTTPTest do
-  use Requestbox.ConnCase, async: true
+defmodule RequestboxWeb.Helpers.HTTPTest do
+  use RequestboxWeb.ConnCase, async: true
 
-  alias Requestbox.Helpers.HTTP
+  alias RequestboxWeb.Helpers.HTTP
 
   test "Provided Content Type" do
     headers = [%Requestbox.Request.Header{name: "content-type", value: "application/random"}]

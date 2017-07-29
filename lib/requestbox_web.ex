@@ -29,20 +29,21 @@ defmodule Requestbox.Web do
 
   def controller do
     quote do
-      use Phoenix.Controller
+      use Phoenix.Controller, namespace: RequestboxWeb
 
       alias Requestbox.Repo
       import Ecto
       import Ecto.Query
 
-      import Requestbox.Router.Helpers
-      import Requestbox.Gettext
+      import RequestboxWeb.Router.Helpers
+      import RequestboxWeb.Gettext
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "web/templates"
+      use Phoenix.View, root: "lib/requestbox_web/templates",
+                        namespace: RequestboxWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -50,9 +51,9 @@ defmodule Requestbox.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Requestbox.Router.Helpers
-      import Requestbox.ErrorHelpers
-      import Requestbox.Gettext
+      import RequestboxWeb.Router.Helpers
+      import RequestboxWeb.ErrorHelpers
+      import RequestboxWeb.Gettext
     end
   end
 
@@ -69,6 +70,8 @@ defmodule Requestbox.Web do
       alias Requestbox.Repo
       import Ecto
       import Ecto.Query
+
+      import RequestboxWeb.Gettext
     end
   end
 

@@ -1,4 +1,4 @@
-defmodule Requestbox.Router do
+defmodule RequestboxWeb.Router do
   use Requestbox.Web, :router
 
   pipeline :browser do
@@ -31,21 +31,21 @@ defmodule Requestbox.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/" do
+  scope "/", RequestboxWeb do
     pipe_through [:parsers, :browser]
 
-    get "/", Requestbox.SessionController, :index
-    post "/", Requestbox.SessionController, :create
+    get "/", SessionController, :index
+    post "/", SessionController, :create
   end
 
-  scope "/" do
+  scope "/", RequestboxWeb do
     pipe_through :browser
-    get "/:id", Requestbox.SessionController, :show
+    get "/:id", SessionController, :show
   end
 
-  scope "/req/:session_id" do
+  scope "/req/:session_id", RequestboxWeb do
     alias Phoenix.Router.Scope
-    forward "/", Requestbox.RequestController
+    forward "/", RequestController
     # Hack a helper for this route
     @phoenix_routes Scope.route(__MODULE__, :match, :get, "/", RequestController, nil, [])
   end

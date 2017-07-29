@@ -13,7 +13,7 @@ config :requestbox, Requestbox.Endpoint,
   cache_static_lookup: false,
   check_origin: false,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
-                    cd: Path.expand("../", __DIR__)]]
+                    cd: Path.expand("../assets", __DIR__)]]
 
 
 # Watch static and templates for browser reloading.
@@ -22,8 +22,8 @@ config :requestbox, Requestbox.Endpoint,
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$},
       ~r{priv/gettext/.*(po)$},
-      ~r{web/views/.*(ex)$},
-      ~r{web/templates/.*(eex)$}
+      ~r{lib/requestbox_web/views/.*(ex)$},
+      ~r{lib/requestbox_web/templates/.*(eex)$}
     ]
   ]
 

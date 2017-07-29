@@ -1,4 +1,4 @@
-defmodule Requestbox.Gettext do
+defmodule RequestboxWeb.Gettext do
   @moduledoc """
   A module providing Internationalization with a gettext-based API.
 

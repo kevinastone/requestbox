@@ -1,4 +1,4 @@
-defmodule Requestbox.RequestController do
+defmodule RequestboxWeb.RequestController do
   # use Requestbox.Web, :controller
   use Plug.Builder
   alias Requestbox.Repo
@@ -37,8 +37,8 @@ defmodule Requestbox.RequestController do
   def secure_compare(a, b) do
     Enum.all?(
       Enum.zip(
-        to_char_list(a <> b),
-        to_char_list(b <> a)
+        to_charlist(a <> b),
+        to_charlist(b <> a)
       ), fn {a, b} -> a == b end
     )
   end

@@ -1,4 +1,4 @@
-defmodule Requestbox.ConnCase do
+defmodule RequestboxWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -25,11 +25,11 @@ defmodule Requestbox.ConnCase do
       import Ecto.Changeset
       import Ecto.Query
 
-      import Requestbox.Router.Helpers
       import Requestbox.Factory
+      import RequestboxWeb.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint Requestbox.Endpoint
+      @endpoint RequestboxWeb.Endpoint
     end
   end
 

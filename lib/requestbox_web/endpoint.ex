@@ -1,7 +1,7 @@
-defmodule Requestbox.Endpoint do
+defmodule RequestboxWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :requestbox
 
-  socket "/socket", Requestbox.UserSocket
+  socket "/socket", RequestboxWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -28,5 +28,5 @@ defmodule Requestbox.Endpoint do
   plug Plug.RequestId
   plug Plug.Logger
 
-  plug Requestbox.Router
+  plug RequestboxWeb.Router
 end
