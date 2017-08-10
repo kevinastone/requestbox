@@ -16,9 +16,9 @@ You can see it dogfood its own webhooks from Github [here](https://enigmatic-str
     git clone https://github.com/kevinastone/requestbox.git
     cd requestbox
     mix deps.get
-    npm install
+    (cd assets && npm install && node node_modules/brunch/bin/brunch build)
     mix ecto.create && mix ecto.migrate
-    mix phoenix.server
+    mix phx.server
     open http://localhost:4000
 
 ## Screenshot
