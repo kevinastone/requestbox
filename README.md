@@ -23,4 +23,4 @@ You can see it dogfood its own webhooks from Github [here](https://enigmatic-str
 
 ## Screenshot
 
-![screenshot](https://raw.github.com/kevinastone/requestbox/master/web/static/assets/images/screenshot.png)
+![screenshot](https://raw.github.com/kevinastone/requestbox/master/assets/static/images/screenshot.png)
