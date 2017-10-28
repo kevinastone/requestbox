@@ -51,7 +51,7 @@ defmodule Requestbox.Mixfile do
      {:scrivener_html, "~> 1.7"},
      {:credo, "~> 0.4", only: [:dev, :test]},
      {:ex_machina, "~> 2.0", only: :test},
-     {:faker, "~> 0.8", only: :test},
+     {:faker, "~> 0.9", only: :test},
      {:phoenix_live_reload, "~> 1.0", only: :dev}
    ]
   end
