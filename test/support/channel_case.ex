@@ -26,7 +26,7 @@ defmodule RequestboxWeb.ChannelCase do
       import Ecto.Query
 
       # The default endpoint for testing
-      @endpoint Requestbox.Endpoint
+      @endpoint RequestboxWeb.Endpoint
     end
   end
 

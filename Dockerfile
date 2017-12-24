@@ -22,10 +22,9 @@ WORKDIR /app
 ADD mix.exs mix.lock ./
 ADD config ./config
 RUN mix deps.get --only-prod
-ADD package.json brunch-config.js ./
-RUN npm install && node node_modules/brunch/bin/brunch build
+ADD assets/package.json assets/package-lock.json assets/brunch-config.js assets/js assets/css assets/static assets/
+RUN cd assets && npm install && node node_modules/brunch/bin/brunch build
 ADD lib ./lib
-ADD web ./web
 RUN mix compile
 ADD priv ./priv
-RUN mix phoenix.digest
+RUN mix phx.digest
