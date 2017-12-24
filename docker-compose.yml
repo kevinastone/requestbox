@@ -3,7 +3,7 @@ services:
   web:
     build: .
     depends_on: ['db']
-    command: mix phoenix.server
+    command: mix phx.server
     ports:
       - "80:80"
     hostname: requestbox

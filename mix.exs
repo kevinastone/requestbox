@@ -66,6 +66,6 @@ defmodule Requestbox.Mixfile do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
      "test": ["ecto.create --quiet", "ecto.migrate", "test"],
-     "runserver": ["ecto.setup", "phoenix.server"]]
+     "runserver": ["ecto.setup", "phx.server"]]
   end
 end
