@@ -8,6 +8,7 @@ defmodule Requestbox.Session do
 
     field :token, :string
     has_many :requests, Requestbox.Request, on_delete: :delete_all
+    has_many :vanity, Requestbox.Vanity, on_delete: :delete_all
     timestamps()
   end
 

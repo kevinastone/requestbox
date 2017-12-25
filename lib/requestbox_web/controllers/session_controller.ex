@@ -3,6 +3,7 @@ defmodule RequestboxWeb.SessionController do
 
   alias Requestbox.Request
   alias Requestbox.Session
+  alias Requestbox.Vanity
 
   plug :scrub_params, "session" when action in [:create, :update]
 
@@ -27,9 +28,38 @@ defmodule RequestboxWeb.SessionController do
 
   def show(conn, %{"id" => id}) do
     conn = conn |> fetch_query_params
-    id = Requestbox.Session.decode(id)
-    session = Session |> Repo.get(id)
-    page = Request.sorted  |> where([r], r.session_id == ^session.id) |> Repo.paginate(conn.query_params)
+    session =
+      with nil <- get_from_hashid(id),
+           nil <- get_from_vanity(id),
+           do: nil
+    render_session(conn, session)
+  end
+
+  defp get_from_hashid(id) do
+    case Requestbox.Session.decode(id) do
+      0 -> nil
+      id -> Repo.get(Session, id)
+    end
+  rescue
+    _ -> nil
+  end
+
+  defp get_from_vanity(id) do
+    query = Vanity |> preload(:session)
+    case Repo.get_by(query, name: id) do
+      %Vanity{session: session} -> session
+      _ -> nil
+    end
+  end
+
+  defp render_session(conn, %Session{} = session) do
+    page = Request.sorted |> where([r], r.session_id == ^session.id) |> Repo.paginate(conn.query_params)
     render(conn, "show.html", session: session, page: page)
+  end
+
+  defp render_session(conn, nil) do
+    conn
+    |> put_status(:not_found)
+    |> render(RequestboxWeb.ErrorView, "404.html")
   end
 end

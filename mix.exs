@@ -27,7 +27,7 @@ defmodule Requestbox.Mixfile do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:test), do: ["lib", "test/support", "test/factories"]
   defp elixirc_paths(_),     do: ["lib"]
 
   # Specifies your project dependencies.
@@ -50,7 +50,7 @@ defmodule Requestbox.Mixfile do
      {:scrivener_ecto, "~> 1.0"},
      {:scrivener_html, "~> 1.7"},
      {:credo, "~> 0.4", only: [:dev, :test]},
-     {:ex_machina, "~> 2.0", only: :test},
+     {:ex_machina, "~> 2.1", only: :test},
      {:faker, "~> 0.9", only: :test},
      {:phoenix_live_reload, "~> 1.0", only: :dev}
    ]
