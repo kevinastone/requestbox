@@ -40,6 +40,8 @@ defmodule RequestboxWeb.SessionController do
       0 -> nil
       id -> Repo.get(Session, id)
     end
+  rescue
+    _ -> nil
   end
 
   defp get_from_vanity(id) do

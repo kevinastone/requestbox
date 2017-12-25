@@ -22,7 +22,6 @@ defmodule RequestboxWeb.SessionControllerTest do
   end
 
   test "GET Session" do
-
     session = insert(:session)
     path = build_conn() |> session_path(:show, session)
     conn = build_conn()
@@ -31,8 +30,17 @@ defmodule RequestboxWeb.SessionControllerTest do
     assert html_response(conn, 200)
   end
 
-  test "GET Session with Request" do
+  test "GET Session with Vanity" do
+    session = build(:session) |> insert()
+    vanity = build(:vanity) |> with_session(session) |> insert()
+    path = build_conn() |> session_path(:show, vanity.name)
+    conn = build_conn()
+    |> put_req_header("accepts", "text/html")
+    |> get(path)
+    assert html_response(conn, 200)
+  end
 
+  test "GET Session with Request" do
     session = insert(:request).session
     path = build_conn() |> session_path(:show, session)
     conn = build_conn()

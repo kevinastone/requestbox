@@ -5,6 +5,8 @@ defmodule Requestbox.Vanity do
 
   alias Requestbox.Session
 
+  @valid_name_regex ~r/^[A-Za-z0-9.~_-]+$/
+
   schema "vanity" do
     field :name, :string, unique: true
 
@@ -22,5 +24,6 @@ defmodule Requestbox.Vanity do
     |> cast(attrs, @required_fields ++ @optional_fields)
     |> cast_assoc(:session)
     |> validate_required(@required_fields)
+    |> validate_format(:name, @valid_name_regex)
   end
 end
