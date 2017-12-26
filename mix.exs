@@ -49,6 +49,7 @@ defmodule Requestbox.Mixfile do
      {:hashids, "~> 2.0"},
      {:scrivener_ecto, "~> 1.0"},
      {:scrivener_html, "~> 1.7"},
+     {:absinthe_ecto, "~> 0.1"},
      {:absinthe_plug, "~> 1.4"},
      {:absinthe_relay, "~> 1.4"},
      {:credo, "~> 0.4", only: [:dev, :test]},
