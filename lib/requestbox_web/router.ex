@@ -24,7 +24,7 @@ defmodule RequestboxWeb.Router do
 
   pipeline :api do
     plug Plug.Parsers,
-      parsers: [:json],
+      parsers: [:json, Absinthe.Plug.Parser],
       json_decoder: Poison
     plug Plug.Head
 
@@ -48,5 +48,14 @@ defmodule RequestboxWeb.Router do
     forward "/", RequestController
     # Hack a helper for this route
     @phoenix_routes Scope.route(__MODULE__, :match, :get, "/", RequestController, nil, [])
+  end
+
+  scope "/api" do
+    pipe_through :api
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: RequestboxWeb.Schema
+
+    forward "/", Absinthe.Plug,
+      schema: RequestboxWeb.Schema
   end
 end
