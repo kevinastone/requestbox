@@ -12,6 +12,9 @@ defmodule RequestboxWeb.Schema.RequestTypes do
   end
 
   node object :request do
+    field :request_id, non_null(:string) do
+      resolve fn request, _, _ -> {:ok, request.id} end
+    end
     field :method, :string
     field :client_ip, :string
     field :path, :string
