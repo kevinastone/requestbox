@@ -2,6 +2,7 @@ defmodule RequestboxWeb.Schema.RequestTypes do
   use Absinthe.Schema.Notation
   use Absinthe.Relay.Schema.Notation, :modern
   use Absinthe.Ecto, repo: Requestbox.Repo
+  use RequestboxWeb.Schema.TimestampTypes
 
   alias Requestbox.Request
 
@@ -26,7 +27,7 @@ defmodule RequestboxWeb.Schema.RequestTypes do
     field :query_string, :string
     field :headers, list_of(:header)
     field :body, :string
-
+    timestamps()
     field :session, :session, resolve: assoc(:session)
   end
 end

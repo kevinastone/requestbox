@@ -5,6 +5,7 @@ defmodule RequestboxWeb.Schema do
 
   import_types Absinthe.Type.Custom
   import_types RequestboxWeb.Schema.HashIDTypes
+  import_types RequestboxWeb.Schema.TimestampTypes
   import_types RequestboxWeb.Schema.RequestTypes
   import_types RequestboxWeb.Schema.SessionTypes
 
