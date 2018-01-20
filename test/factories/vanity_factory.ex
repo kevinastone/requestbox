@@ -11,10 +11,12 @@ defmodule Requestbox.VanityFactory do
       end
 
       def with_session(%Vanity{} = vanity, session \\ nil) do
-        session = case session do
-          nil -> build(:session)
-          _ -> session
-        end
+        session =
+          case session do
+            nil -> build(:session)
+            _ -> session
+          end
+
         %{vanity | session: session}
       end
     end

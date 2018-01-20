@@ -4,11 +4,11 @@ defmodule RequestboxWeb.SessionController do
   alias Requestbox.Request
   alias Requestbox.Session
 
-  plug :scrub_params, "session" when action in [:create, :update]
+  plug(:scrub_params, "session" when action in [:create, :update])
 
   def index(conn, _params) do
     changeset = Session.changeset(%Session{})
-    render conn, :index, changeset: changeset
+    render(conn, :index, changeset: changeset)
   end
 
   def create(conn, %{"session" => session_params}) do
@@ -18,6 +18,7 @@ defmodule RequestboxWeb.SessionController do
       {:ok, session} ->
         conn
         |> redirect(to: session_path(conn, :show, session))
+
       {:error, _changeset} ->
         conn
         |> put_flash(:error, "Failed to create a session.")
@@ -32,7 +33,10 @@ defmodule RequestboxWeb.SessionController do
   end
 
   defp render_session(conn, %Session{} = session) do
-    page = Request.sorted |> where([r], r.session_id == ^session.id) |> Repo.paginate(conn.query_params)
+    page =
+      Request.sorted() |> where([r], r.session_id == ^session.id)
+      |> Repo.paginate(conn.query_params)
+
     render(conn, "show.html", session: session, page: page)
   end
 

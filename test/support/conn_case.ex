@@ -36,9 +36,9 @@ defmodule RequestboxWeb.ConnCase do
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Requestbox.Repo)
 
-    on_exit fn ->
+    on_exit(fn ->
       Ecto.Adapters.SQL.Sandbox.checkin(Requestbox.Repo, [])
-    end
+    end)
 
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(Requestbox.Repo, {:shared, self()})

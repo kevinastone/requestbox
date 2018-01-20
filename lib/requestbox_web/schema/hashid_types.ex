@@ -5,8 +5,8 @@ defmodule RequestboxWeb.Schema.HashIDTypes do
   use Requestbox.HashID
 
   scalar :hashid, name: "HashID" do
-    serialize &encode/1
-    parse &decode_ast/1
+    serialize(&encode/1)
+    parse(&decode_ast/1)
   end
 
   defp decode_ast(%Absinthe.Blueprint.Input.String{value: value}) do

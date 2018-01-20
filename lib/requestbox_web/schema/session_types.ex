@@ -6,15 +6,17 @@ defmodule RequestboxWeb.Schema.SessionTypes do
   alias RequestboxWeb.Resolvers
   alias Requestbox.Session
 
-  connection node_type: :request
+  connection(node_type: :request)
 
-  node object :session, id_fetcher: &hashid_fetcher/2 do
+  node object(:session, id_fetcher: &hashid_fetcher/2) do
     field :session_id, non_null(:hashid) do
-      resolve fn session, _, _ -> {:ok, session.id} end
+      resolve(fn session, _, _ -> {:ok, session.id} end)
     end
+
     timestamps()
-    connection field :requests, node_type: :request do
-      resolve &Resolvers.Requests.find_requests/2
+
+    connection field(:requests, node_type: :request) do
+      resolve(&Resolvers.Requests.find_requests/2)
     end
   end
 

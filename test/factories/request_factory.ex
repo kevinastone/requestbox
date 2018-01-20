@@ -21,7 +21,7 @@ defmodule Requestbox.RequestFactory do
       end
 
       def with_headers(%Request{} = request, count \\ 2) do
-        %{request | headers: (for _ <- 0..count, do: header_factory())}
+        %{request | headers: for(_ <- 0..count, do: header_factory())}
       end
     end
   end

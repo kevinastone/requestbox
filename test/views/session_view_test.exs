@@ -10,8 +10,10 @@ defmodule RequestboxWeb.RequestViewTest do
   end
 
   test "render request with headers" do
-    request = build(:request)
-    |> with_headers(3)
+    request =
+      build(:request)
+      |> with_headers(3)
+
     render_to_string(RequestboxWeb.SessionView, "request.html", request: request)
   end
 end

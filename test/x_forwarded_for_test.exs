@@ -7,8 +7,10 @@ defmodule Plug.XForwardedForTest do
   @opts XForwardedFor.init([])
 
   test "Extracts X-Forwarded-For" do
-    conn = conn(:get, "/hello")
-    |> put_req_header("x-forwarded-for", "192.168.100.200")
+    conn =
+      conn(:get, "/hello")
+      |> put_req_header("x-forwarded-for", "192.168.100.200")
+
     conn = XForwardedFor.call(conn, @opts)
 
     assert conn.remote_ip == {192, 168, 100, 200}

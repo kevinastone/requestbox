@@ -1,5 +1,4 @@
 defmodule RequestboxWeb.Helpers.HTTP do
-
   def color_method("GET"), do: "label-success"
   def color_method("POST"), do: "label-primary"
   def color_method("PUT"), do: "label-info"
@@ -15,6 +14,7 @@ defmodule RequestboxWeb.Helpers.HTTP do
   end
 
   def header_case("dnt" = _header), do: "DNT"
+
   def header_case(header) do
     header
     |> String.split("-")
@@ -32,6 +32,6 @@ defmodule RequestboxWeb.Helpers.HTTP do
   end
 
   defmacro __using__(_) do
-    quote do: import RequestboxWeb.Helpers.HTTP
+    quote do: import(RequestboxWeb.Helpers.HTTP)
   end
 end
