@@ -3,8 +3,8 @@ defmodule RequestboxWeb.Schema.SessionTypes do
   use Absinthe.Relay.Schema.Notation, :modern
   use RequestboxWeb.Schema.TimestampTypes
 
-  alias RequestboxWeb.Resolvers
   alias Requestbox.Session
+  alias RequestboxWeb.Resolvers
 
   connection(node_type: :request)
 

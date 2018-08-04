@@ -1,8 +1,8 @@
 defmodule Requestbox.RequestFactory do
   defmacro __using__(_) do
     quote do
-      alias Requestbox.Request.Header
       alias Requestbox.Request
+      alias Requestbox.Request.Header
 
       def header_factory do
         %Header{
