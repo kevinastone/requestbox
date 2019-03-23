@@ -15,6 +15,8 @@ config :requestbox, RequestboxWeb.Endpoint,
   secret_key_base: "HuiaFVoiGvYFhfAPG/OOMmOI9DV0kAVe4TZVbq1lR3nSWtdeRVmniAFVU+H84aBx",
   pubsub: [name: Requestbox.PubSub, adapter: Phoenix.PubSub.PG2]
 
+config :requestbox, session_key: "_requestbox_key"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

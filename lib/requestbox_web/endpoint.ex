@@ -1,7 +1,7 @@
 defmodule RequestboxWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :requestbox
 
-  socket("/socket", RequestboxWeb.UserSocket)
+  socket "/socket", RequestboxWeb.UserSocket, websocket: true
 
   # Serve at "/" the static files from "priv/static" directory.
   #

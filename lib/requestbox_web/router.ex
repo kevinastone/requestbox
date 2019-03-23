@@ -7,7 +7,7 @@ defmodule RequestboxWeb.Router do
     plug(
       Plug.Session,
       store: :cookie,
-      key: "_requestbox_key",
+      key: Application.fetch_env!(:requestbox, :session_key),
       signing_salt: "i8W95jtn"
     )
 
