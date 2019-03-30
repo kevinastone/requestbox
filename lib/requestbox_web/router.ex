@@ -59,7 +59,10 @@ defmodule RequestboxWeb.Router do
   scope "/api" do
     pipe_through(:api)
 
-    forward("/graphiql", Absinthe.Plug.GraphiQL, schema: RequestboxWeb.Schema)
+    forward("/graphiql", Absinthe.Plug.GraphiQL,
+      schema: RequestboxWeb.Schema,
+      interface: :playground
+    )
 
     forward("/", Absinthe.Plug, schema: RequestboxWeb.Schema)
   end

@@ -3,8 +3,7 @@ defmodule Requestbox.Repo.Migrations.SessionToken do
 
   def change do
     alter table(:sessions) do
-
-      add :token, :string
+      add(:token, :string)
     end
   end
 end

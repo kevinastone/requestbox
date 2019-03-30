@@ -34,7 +34,8 @@ defmodule RequestboxWeb.SessionController do
 
   defp render_session(conn, %Session{} = session) do
     page =
-      Request.sorted() |> where([r], r.session_id == ^session.id)
+      Request.sorted()
+      |> where([r], r.session_id == ^session.id)
       |> Repo.paginate(conn.query_params)
 
     render(conn, "show.html", session: session, page: page)
