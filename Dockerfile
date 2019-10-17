@@ -1,17 +1,17 @@
 FROM elixir:alpine
 
-ENV MIX_ENV=docker PORT=80
+ENV MIX_ENV=docker
+ENV PORT=80
 
 EXPOSE 80
 
-RUN apk add --update postgresql-client nodejs npm
-# SQLite dependency
-# RUN apk add --update build-base sqlite-dev
+RUN apk add --update postgresql-client nodejs npm curl
+
+WORKDIR /app
 
 RUN mix local.rebar
 RUN mix local.hex --force
 
-WORKDIR /app
 ADD mix.exs mix.lock ./
 ADD config ./config
 RUN mix deps.get --only-prod

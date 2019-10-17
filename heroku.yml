@@ -1,12 +1,14 @@
 setup:
   addons:
     - plan: heroku-postgresql
+  config:
+    MIX_ENV: prod
 build:
   docker:
     web: Dockerfile
-release:
-  command:
-    - mix ecto.setup
-  image: web
+# release:
+#   image: web
+#   command:
+#     - mix ecto.setup
 run:
-  web: MIX_ENV=prod mix phx.server
+  web: mix phx.server
