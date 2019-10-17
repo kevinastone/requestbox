@@ -1,6 +1,6 @@
 FROM elixir:alpine
 
-ENV MIX_ENV=docker
+ENV MIX_ENV=prod
 ENV PORT=80
 
 EXPOSE 80
@@ -9,7 +9,8 @@ RUN apk add --update postgresql-client nodejs npm curl
 
 WORKDIR /app
 
-RUN mix local.rebar
+ENV MIX_HOME /root/.mix
+RUN mix local.rebar --force
 RUN mix local.hex --force
 
 ADD mix.exs mix.lock ./

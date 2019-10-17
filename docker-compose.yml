@@ -8,6 +8,7 @@ services:
     hostname: requestbox
     domainname: localhost
     environment:
+      MIX_ENV: docker
       DATABASE_URL: postgres://requestbox:changeme@db/requestbox
       SECRET_KEY_BASE: bbe5c9bc68b1f64ffd82bd852c96bf631dfbb77e50a67aadb235774381c21104e0b499b1d21afacd6b9ee5a9ebc28a1d30269cae307a0e22fd6bbcff4389e4fd
   db:
