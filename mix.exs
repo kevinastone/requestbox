@@ -22,22 +22,22 @@ defmodule Requestbox.Mixfile do
   def application do
     [
       mod: {Requestbox, []},
-      applications: [
-        :cowboy,
-        :logger,
-        :quantum,
-        :timex,
-        :tzdata,
-        :gettext,
-        :phoenix,
-        :phoenix_html,
-        :phoenix_ecto,
-        :scrivener_ecto,
-        :scrivener_html,
-        :ecto,
-        :postgrex,
-        :sqlite_ecto2
-      ]
+      # applications: [
+      #   :cowboy,
+      #   :logger,
+      #   :quantum,
+      #   :timex,
+      #   :tzdata,
+      #   :gettext,
+      #   :phoenix,
+      #   :phoenix_html,
+      #   :phoenix_ecto,
+      #   :scrivener_ecto,
+      #   :scrivener_html,
+      #   :ecto,
+      #   :postgrex,
+      #   :sqlite_ecto2
+      # ]
     ]
   end
 
@@ -55,7 +55,7 @@ defmodule Requestbox.Mixfile do
       {:ecto, "~> 2.2"},
       {:phoenix_ecto, "~> 3.0"},
       {:postgrex, "~> 0.13"},
-      {:sqlite_ecto2, "~> 2.3"},
+      {:sqlite_ecto2, "~> 2.3", only: [:dev, :test]},
       {:gettext, "~> 0.11"},
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.7"},
