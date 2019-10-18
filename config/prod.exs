@@ -26,6 +26,8 @@ config :requestbox, Requestbox.Repo,
   url: System.get_env("DATABASE_URL"),
   pool_size: 10
 
+config :phoenix, :serve_endpoints, true
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
