@@ -16,11 +16,15 @@ RUN mix local.hex --force
 ADD mix.exs mix.lock ./
 ADD config ./config
 RUN mix deps.get --only-prod
-ADD assets/package.json assets/package-lock.json assets/brunch-config.js assets/js assets/css assets/static assets/
-RUN cd assets && npm install && node node_modules/brunch/bin/brunch build
-ADD lib ./lib
-RUN mix compile
-ADD priv ./priv
+ADD priv/repo priv/
+ADD assets/package.json assets/package-lock.json assets/brunch-config.js assets/
+ADD assets/js assets/js/
+ADD assets/css assets/css/
+ADD assets/static assets/static/
+RUN cd assets && npm install && DEBUG='brunch:*' node node_modules/brunch/bin/brunch build --production
 RUN mix phx.digest
+
+ADD lib lib
+RUN mix compile
 
 CMD mix phx.server
