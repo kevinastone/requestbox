@@ -71,6 +71,7 @@ defmodule Requestbox.Mixfile do
       {:absinthe_ecto, "~> 0.1"},
       {:absinthe_plug, "~> 1.4"},
       {:absinthe_relay, "~> 1.4"},
+      {:distillery, "~> 2.0"},
       {:credo, "~> 0.4", only: [:dev, :test]},
       {:ex_machina, "~> 2.1", only: :test},
       {:faker, "~> 0.9", only: :test},

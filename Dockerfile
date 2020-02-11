@@ -49,12 +49,13 @@ COPY --from=deps /app/deps ./deps/
 COPY --from=frontend /app/priv/static priv/static/
 
 ADD lib lib
+ADD rel rel
 RUN mix compile
 
-ADD priv/repo priv/
+ADD priv/repo priv/repo
 RUN mix phx.digest
 
-RUN mix release
+RUN mix distillery.release --verbose
 
 
 FROM base as serve
@@ -62,8 +63,12 @@ FROM base as serve
 ENV PORT=80
 EXPOSE 80
 
+RUN apk update && \
+    apk add --no-cache \
+      bash
+
 WORKDIR /app
 COPY --from=build /app/_build/${MIX_ENV}/rel/requestbox ./
 
 ENTRYPOINT ["/app/bin/requestbox"]
-CMD ["start"]
+CMD ["foreground"]
