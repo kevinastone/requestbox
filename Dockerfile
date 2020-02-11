@@ -26,7 +26,7 @@ WORKDIR /app
 
 COPY --from=deps /app/deps deps/
 
-ADD assets/package.json assets/package-lock.json assets/brunch-config.js assets/
+ADD assets/package.json assets/package-lock.json assets/webpack.config.js assets/.babelrc assets/
 ADD assets/js assets/js/
 ADD assets/css assets/css/
 ADD assets/static assets/static/
@@ -34,7 +34,7 @@ ADD assets/static assets/static/
 WORKDIR /app/assets
 
 RUN npm install
-RUN DEBUG='brunch:*' node node_modules/brunch/bin/brunch build --production
+RUN npm run deploy
 
 
 FROM base as build
