@@ -6,7 +6,7 @@ setup:
 build:
   docker:
     web: Dockerfile
-# release:
-#   image: web
-#   command:
-#     - mix ecto.setup
+release:
+  image: web
+  command:
+    - migrate
