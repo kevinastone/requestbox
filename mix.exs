@@ -62,6 +62,7 @@ defmodule Requestbox.Mixfile do
       {:quantum, ">= 1.5.0"},
       {:jason, "~> 1.0"},
       {:maptu, "~> 1.0"},
+      {:ok, "~> 2.3"},
       {:timex_ecto, "~> 3.3"},
       {:timex, "~> 3.5"},
       {:hashids, "~> 2.0"},

@@ -4,44 +4,36 @@ defmodule Requestbox.Request do
     defstruct [:name, :value]
 
     defmodule Type do
+      use OK.Pipe
+      require OK
       alias Requestbox.Request.Header
-      import Maptu, only: [strict_struct!: 2]
+      import Maptu, only: [strict_struct: 2]
 
       @behaviour Ecto.Type
       def type, do: :text
 
-      def cast(%Header{} = header), do: header
-      def cast(%{} = header), do: strict_struct!(Header, header)
+      def cast(%Header{} = header), do: OK.success(header)
+      def cast(%{} = header), do: strict_struct(Header, header)
 
-      def load(value) do
-        case Jason.decode(value) do
-          {:ok, raw} -> cast(raw)
-          other -> other
-        end
-      end
+      def load(value), do: Jason.decode(value) ~>> cast
       def dump(value), do: Jason.encode(value)
     end
   end
 
   defmodule Headers do
     defmodule Type do
+      use OK.Pipe
+      require OK
       alias Requestbox.Request.Header
 
       @behaviour Ecto.Type
       def type, do: :text
 
       def cast(headers) when is_list(headers) do
-        {:ok, Enum.map(headers, &Header.Type.cast/1)}
+        OK.map_all(headers, &Header.Type.cast/1)
       end
 
-      def cast(_other), do: :error
-
-      def load(value) do
-        case Jason.decode(value) do
-          {:ok, raw} -> cast(raw)
-          other -> other
-        end
-      end
+      def load(value), do: Jason.decode(value) ~>> cast
       def dump(value), do: Jason.encode(value)
     end
   end
