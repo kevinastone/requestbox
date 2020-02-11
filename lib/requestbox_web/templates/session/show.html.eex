@@ -2,7 +2,7 @@
   <div class="form-group">
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon3">Box URL</span>
-      <input id="sessionUrl" class="form-control" type="text" value="<%= request_url(@conn, nil, @session) %>" onfocus="setTimeout(function() {select();})">
+      <input id="sessionUrl" class="form-control" type="text" value="<%= Routes.request_url(@conn, nil, @session) %>" onfocus="setTimeout(function() {select();})">
     </div>
   </div>
 </form>
@@ -12,9 +12,9 @@
   <%= for request <- @page.entries do %>
     <%= render "request.html", request: request %>
   <% end %>
-  <%= pagination_links @conn, @page, [@session], path: fn (conn, _opts, session, params) -> session_path(conn, :show, session, params) end %>
+  <%= pagination_links @conn, @page, [@session], path: fn (conn, _opts, session, params) -> Routes.session_path(conn, :show, session, params) end %>
 <% else %>
   <p>Make a request to get started. After making a request, Reload the page to see the updates.</p>
   <h3>cURL</h3>
-  <pre><code>curl -X POST -d "fizz=buzz" <%= request_url(@conn, nil, @session) %></code></pre>
+  <pre><code>curl -X POST -d "fizz=buzz" <%= Routes.request_url(@conn, nil, @session) %></code></pre>
 <% end %>

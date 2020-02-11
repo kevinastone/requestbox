@@ -34,3 +34,10 @@ import_config "#{Mix.env()}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+# Use Jason for JSON parsing in Phoenix
+config :phoenix, :json_library, Jason
+config :phoenix, :format_encoders,
+  json: Jason
+
+config :ecto, json_library: Jason

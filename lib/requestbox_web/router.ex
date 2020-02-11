@@ -30,7 +30,7 @@ defmodule RequestboxWeb.Router do
     plug(
       Plug.Parsers,
       parsers: [:json, Absinthe.Plug.Parser],
-      json_decoder: Poison
+      json_decoder: Jason
     )
 
     plug(Plug.Head)

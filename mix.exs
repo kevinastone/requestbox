@@ -50,7 +50,7 @@ defmodule Requestbox.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.0"},
+      {:phoenix, "~> 1.4"},
       {:phoenix_html, "~> 2.13"},
       {:ecto, "~> 2.2"},
       {:phoenix_ecto, "~> 3.0"},
@@ -60,7 +60,8 @@ defmodule Requestbox.Mixfile do
       {:plug_cowboy, "~> 2.0"},
       {:plug, "~> 1.7"},
       {:quantum, ">= 1.5.0"},
-      {:poison, "~> 2.2"},
+      {:jason, "~> 1.0"},
+      {:maptu, "~> 1.0"},
       {:timex_ecto, "~> 3.3"},
       {:timex, "~> 3.5"},
       {:hashids, "~> 2.0"},

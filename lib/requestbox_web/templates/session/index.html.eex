@@ -4,7 +4,7 @@
     RequestBox gives you a URL that will collect requests made to it and let you inspect them in a human-friendly way.
 Use RequestBox to see what your HTTP client is sending or to inspect and debug webhook requests.
   </p>
-  <%= form_for @changeset, session_path(@conn, :create), fn f -> %>
+  <%= form_for @changeset, Routes.session_path(@conn, :create), fn f -> %>
   <p>
     <div class="form-group">
       <%= submit "Create a RequestBox", class: "btn btn-primary btn-lg", role: "button" %><br>

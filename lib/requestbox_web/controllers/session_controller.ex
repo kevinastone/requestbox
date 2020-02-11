@@ -17,12 +17,12 @@ defmodule RequestboxWeb.SessionController do
     case Repo.insert(changeset) do
       {:ok, session} ->
         conn
-        |> redirect(to: session_path(conn, :show, session))
+        |> redirect(to: Routes.session_path(conn, :show, session))
 
       {:error, _changeset} ->
         conn
         |> put_flash(:error, "Failed to create a session.")
-        |> redirect(to: session_path(conn, :index))
+        |> redirect(to: Routes.session_path(conn, :index))
     end
   end
 

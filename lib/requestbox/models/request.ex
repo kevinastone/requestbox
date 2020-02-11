@@ -1,18 +1,25 @@
 defmodule Requestbox.Request do
   defmodule Header do
+    @derive [Jason.Encoder]
     defstruct [:name, :value]
 
     defmodule Type do
       alias Requestbox.Request.Header
+      import Maptu, only: [strict_struct!: 2]
 
       @behaviour Ecto.Type
       def type, do: :text
 
       def cast(%Header{} = header), do: header
-      def cast(%{} = header), do: struct(Header, header)
+      def cast(%{} = header), do: strict_struct!(Header, header)
 
-      def load(value), do: Poison.decode(value, as: %Header{})
-      def dump(value), do: Poison.encode(value)
+      def load(value) do
+        case Jason.decode(value) do
+          {:ok, raw} -> cast(raw)
+          other -> other
+        end
+      end
+      def dump(value), do: Jason.encode(value)
     end
   end
 
@@ -29,8 +36,13 @@ defmodule Requestbox.Request do
 
       def cast(_other), do: :error
 
-      def load(value), do: Poison.decode(value, as: [%Header{}])
-      def dump(value), do: Poison.encode(value)
+      def load(value) do
+        case Jason.decode(value) do
+          {:ok, raw} -> cast(raw)
+          other -> other
+        end
+      end
+      def dump(value), do: Jason.encode(value)
     end
   end
 
