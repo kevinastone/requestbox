@@ -58,6 +58,7 @@ release :requestbox do
     :runtime_tools
   ]
   set commands: [
+    create: "rel/commands/create.sh",
     migrate: "rel/commands/migrate.sh",
   ]
 end

@@ -9,6 +9,14 @@ defmodule Requestbox.ReleaseTasks do
 
   @repos Application.get_env(:requestbox, :ecto_repos, [])
 
+  def create(_argv) do
+    start_services()
+
+    run_create()
+
+    stop_services()
+  end
+
   def migrate(_argv) do
     start_services()
 
@@ -42,6 +50,25 @@ defmodule Requestbox.ReleaseTasks do
   defp stop_services do
     IO.puts("Success!")
     :init.stop()
+  end
+
+  defp run_create do
+    Enum.each(@repos, &run_create_for/1)
+  end
+
+  defp run_create_for(repo) do
+    case repo.__adapter__.storage_up(repo.config) do
+      :ok ->
+        IO.puts("The database for #{inspect repo} has been created")
+      {:error, :already_up} ->
+        IO.puts("The database for #{inspect repo} has already been created")
+      {:error, term} when is_binary(term) ->
+        IO.puts("The database for #{inspect repo} couldn't be created: #{term}")
+        exit(1)
+      {:error, term} ->
+        IO.puts("The database for #{inspect repo} couldn't be created: #{inspect term}")
+        exit(1)
+    end
   end
 
   defp run_migrations do
