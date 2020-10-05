@@ -6,7 +6,7 @@ setup:
 build:
   docker:
     web: Dockerfile
-release:
-  image: web
-  command:
-    - migrate
+# release:
+#   image: web
+#   command:
+#     - migrate
