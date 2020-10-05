@@ -33,12 +33,12 @@ defmodule RequestboxWeb.SessionController do
   end
 
   defp render_session(conn, %Session{} = session) do
-    page =
+    {requests, pagination} =
       Request.sorted()
       |> where([r], r.session_id == ^session.id)
       |> Repo.paginate(conn.query_params)
 
-    render(conn, "show.html", session: session, page: page)
+    render(conn, "show.html", session: session, requests: requests, pagination: pagination)
   end
 
   defp render_session(conn, nil) do

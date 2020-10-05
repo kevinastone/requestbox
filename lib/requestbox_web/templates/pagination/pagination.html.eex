@@ -1,0 +1,13 @@
+<%= pagination @conn, @pagination, [window: 5, first: true, last: true], fn p -> %>
+  <nav>
+    <ul class="pagination">
+      <li><%= pagination_link p, :previous, label: gettext("<<") %></li>
+      <li><%= pagination_link p, :first, label: gettext("First") %></li>
+      <%= for {pagenum, _, active} <- p.page_items do  %>
+        <li class="<%= if active do 'active' end %>"><%= pagination_link p, pagenum, current: active %></li>
+      <% end %>
+      <li><%= pagination_link p, :last, label: gettext("Last") %></li>
+      <li><%= pagination_link p, :next, label: gettext(">>") %></li>
+    </ul>
+  </nav>
+<% end %>
