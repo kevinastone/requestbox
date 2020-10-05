@@ -64,7 +64,7 @@ defmodule Requestbox.MixProject do
       {:timex_ecto, "~> 3.3"},
       {:timex, "~> 3.5"},
       {:hashids, "~> 2.0"},
-      {:phoenix_pagination, "~> 0.5.0"},
+      {:numerator, "~> 0.2.0"},
       {:absinthe_ecto, "~> 0.1"},
       {:absinthe_plug, "~> 1.4"},
       {:absinthe_relay, "~> 1.4"},

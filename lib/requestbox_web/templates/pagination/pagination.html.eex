@@ -1,13 +1,26 @@
-<%= pagination @conn, @pagination, [window: 5, first: true, last: true], fn p -> %>
   <nav>
     <ul class="pagination">
-      <li><%= pagination_link p, :previous, label: gettext("<<") %></li>
-      <li><%= pagination_link p, :first, label: gettext("First") %></li>
-      <%= for {pagenum, _, active} <- p.page_items do  %>
-        <li class="<%= if active do 'active' end %>"><%= pagination_link p, pagenum, current: active %></li>
+      <%= for element <- @pagination_data do %>
+        <%= case element do %>
+          <% %{type: :ellipsis} -> %>
+            <li class="page-item disabled"><span class="page-link">…</span></li>
+          <% %{type: :current, page: page} -> %>
+            <li class="page-item active" aria-current="page">
+              <span class="page-link"><%= page %><span class="sr-only">(current)</span></span>
+            </li>
+          <% %{type: :page, page: page} -> %>
+            <li class="page-item">
+              <%= link page, to: page_link(@conn, page) %>
+            </li>
+          <% %{type: :prev, page: page} -> %>
+            <li class="page-item">
+              <%= link "<<", to: page_link(@conn, page) %>
+            </li>
+          <% %{type: :next, page: page} -> %>
+            <li class="page-item">
+              <%= link ">>", to: page_link(@conn, page) %>
+            </li>
+        <% end %>
       <% end %>
-      <li><%= pagination_link p, :last, label: gettext("Last") %></li>
-      <li><%= pagination_link p, :next, label: gettext(">>") %></li>
     </ul>
   </nav>
-<% end %>
