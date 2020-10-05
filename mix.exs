@@ -1,4 +1,4 @@
-defmodule Requestbox.Mixfile do
+defmodule Requestbox.MixProject do
   use Mix.Project
 
   def project do
@@ -32,8 +32,6 @@ defmodule Requestbox.Mixfile do
       #   :phoenix,
       #   :phoenix_html,
       #   :phoenix_ecto,
-      #   :scrivener_ecto,
-      #   :scrivener_html,
       #   :ecto,
       #   :postgrex,
       #   :sqlite_ecto2
@@ -50,14 +48,14 @@ defmodule Requestbox.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4"},
+      {:phoenix, "~> 1.5"},
       {:phoenix_html, "~> 2.13"},
       {:ecto, "~> 2.2"},
       {:phoenix_ecto, "~> 3.0"},
       {:postgrex, "~> 0.13"},
       {:sqlite_ecto2, "~> 2.3", only: [:dev, :test]},
       {:gettext, "~> 0.11"},
-      {:plug_cowboy, "~> 2.0"},
+      {:plug_cowboy, "~> 2.1"},
       {:plug, "~> 1.7"},
       {:quantum, ">= 1.5.0"},
       {:jason, "~> 1.0"},
@@ -66,8 +64,7 @@ defmodule Requestbox.Mixfile do
       {:timex_ecto, "~> 3.3"},
       {:timex, "~> 3.5"},
       {:hashids, "~> 2.0"},
-      {:scrivener_ecto, "~> 1.0"},
-      {:scrivener_html, "~> 1.7"},
+      {:phoenix_pagination, "~> 0.5.0"},
       {:absinthe_ecto, "~> 0.1"},
       {:absinthe_plug, "~> 1.4"},
       {:absinthe_relay, "~> 1.4"},

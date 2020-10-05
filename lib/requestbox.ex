@@ -7,10 +7,12 @@ defmodule Requestbox do
     import Supervisor.Spec, warn: false
 
     children = [
+      # Start the PubSub system
+      {Phoenix.PubSub, name: Requestbox.PubSub},
       # Start the endpoint when the application starts
-      supervisor(RequestboxWeb.Endpoint, []),
+      RequestboxWeb.Endpoint,
       # Start the Ecto repository
-      worker(Requestbox.Repo, [])
+      Requestbox.Repo,
       # Here you could define other workers and supervisors as children
       # worker(Requestbox.Worker, [arg1, arg2, arg3]),
     ]
