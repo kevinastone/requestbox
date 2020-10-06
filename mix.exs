@@ -21,7 +21,7 @@ defmodule Requestbox.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Requestbox, []},
+      mod: {Requestbox, []}
       # applications: [
       #   :cowboy,
       #   :logger,

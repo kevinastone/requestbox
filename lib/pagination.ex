@@ -1,5 +1,4 @@
 defmodule Requestbox.Pagination do
-
   defstruct page: 0, last: 0
   import Ecto.Query
 
@@ -30,15 +29,16 @@ defmodule Requestbox.Pagination do
     page = get_page(opts, total_pages)
     offset = get_offset(total_count, page, per_page)
 
-    pagination = %Pagination {
+    pagination = %Pagination{
       page: page,
-      last: total_pages,
+      last: total_pages
     }
 
     {get_items(repo, query, per_page, offset), pagination}
   end
 
   defp get_items(repo, query, nil, _), do: repo.all(query)
+
   defp get_items(repo, query, limit, offset) do
     query
     |> limit(^limit)
@@ -47,10 +47,11 @@ defmodule Requestbox.Pagination do
   end
 
   defp get_offset(total_pages, page, per_page) do
-    page = case page > total_pages do
-      true -> total_pages
-      _ -> page
-    end
+    page =
+      case page > total_pages do
+        true -> total_pages
+        _ -> page
+      end
 
     case page > 0 do
       true -> (page - 1) * per_page
@@ -59,6 +60,7 @@ defmodule Requestbox.Pagination do
   end
 
   defp get_total_count(count, _repo, _query) when is_integer(count) and count >= 0, do: count
+
   defp get_total_count(_count, repo, query) do
     total_pages =
       query
@@ -77,8 +79,9 @@ defmodule Requestbox.Pagination do
   end
 
   defp get_total_pages(_, nil), do: 1
+
   defp get_total_pages(count, per_page) do
-    (count / per_page) |> Float.ceil |> trunc
+    (count / per_page) |> Float.ceil() |> trunc
   end
 
   defp get_page(params, total_pages) do
@@ -90,15 +93,15 @@ defmodule Requestbox.Pagination do
 
   defp get_per_page(params) do
     case Keyword.get(params, :per_page) do
-      nil       -> @per_page
-      per_page  -> per_page |> to_integer()
+      nil -> @per_page
+      per_page -> per_page |> to_integer()
     end
   end
 
   defp get_max_page(params) do
     case Keyword.get(params, :max_page) do
-      nil       -> @max_page
-      max_page  -> max_page |> to_integer()
+      nil -> @max_page
+      max_page -> max_page |> to_integer()
     end
   end
 
@@ -106,10 +109,11 @@ defmodule Requestbox.Pagination do
     page = Map.get(params, "page", @page) |> to_integer()
     per_page = get_per_page(opts)
     max_page = get_max_page(opts)
-    Keyword.merge(opts, [page: page, per_page: per_page, params: params, max_page: max_page])
+    Keyword.merge(opts, page: page, per_page: per_page, params: params, max_page: max_page)
   end
 
   defp to_integer(i) when is_integer(i), do: abs(i)
+
   defp to_integer(i) when is_binary(i) do
     case Integer.parse(i) do
       {n, _} -> n

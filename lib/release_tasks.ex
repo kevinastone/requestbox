@@ -3,7 +3,7 @@ defmodule Requestbox.ReleaseTasks do
     :crypto,
     :ssl,
     :postgrex,
-    :ecto,
+    :ecto
     # :ecto_sql # If using Ecto 3.0 or higher
   ]
 
@@ -59,14 +59,17 @@ defmodule Requestbox.ReleaseTasks do
   defp run_create_for(repo) do
     case repo.__adapter__.storage_up(repo.config) do
       :ok ->
-        IO.puts("The database for #{inspect repo} has been created")
+        IO.puts("The database for #{inspect(repo)} has been created")
+
       {:error, :already_up} ->
-        IO.puts("The database for #{inspect repo} has already been created")
+        IO.puts("The database for #{inspect(repo)} has already been created")
+
       {:error, term} when is_binary(term) ->
-        IO.puts("The database for #{inspect repo} couldn't be created: #{term}")
+        IO.puts("The database for #{inspect(repo)} couldn't be created: #{term}")
         exit(1)
+
       {:error, term} ->
-        IO.puts("The database for #{inspect repo} couldn't be created: #{inspect term}")
+        IO.puts("The database for #{inspect(repo)} couldn't be created: #{inspect(term)}")
         exit(1)
     end
   end
