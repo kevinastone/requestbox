@@ -7,7 +7,7 @@ defmodule Requestbox.ReleaseTasks do
     # :ecto_sql # If using Ecto 3.0 or higher
   ]
 
-  @repos Application.get_env(:requestbox, :ecto_repos, [])
+  @repos Application.compile_env(:requestbox, :ecto_repos, [])
 
   def create(_argv) do
     start_services()
