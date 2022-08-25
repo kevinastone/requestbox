@@ -8,7 +8,7 @@ defmodule Requestbox.Vanity do
   @valid_name_regex ~r/^[A-Za-z0-9.~_-]+$/
 
   schema "vanity" do
-    field(:name, :string, unique: true)
+    field(:name, :string)
 
     belongs_to(:session, Session)
 

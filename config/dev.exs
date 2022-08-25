@@ -42,7 +42,7 @@ config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
 config :requestbox, Requestbox.Repo,
-  adapter: Sqlite.Ecto2,
+  adapter: Ecto.Adapters.SQLite3,
   database: "dev.sqlite3",
   hostname: "localhost",
   pool_size: 10

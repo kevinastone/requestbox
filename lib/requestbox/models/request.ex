@@ -4,12 +4,12 @@ defmodule Requestbox.Request do
     defstruct [:name, :value]
 
     defmodule Type do
+      use Ecto.Type
       use OK.Pipe
       require OK
       alias Requestbox.Request.Header
       import Maptu, only: [strict_struct: 2]
 
-      @behaviour Ecto.Type
       def type, do: :text
 
       def cast(%Header{} = header), do: OK.success(header)
@@ -22,11 +22,11 @@ defmodule Requestbox.Request do
 
   defmodule Headers do
     defmodule Type do
+      use Ecto.Type
       use OK.Pipe
       require OK
       alias Requestbox.Request.Header
 
-      @behaviour Ecto.Type
       def type, do: :text
 
       def cast(headers) when is_list(headers) do
