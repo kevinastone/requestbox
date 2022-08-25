@@ -18,8 +18,7 @@ defmodule RequestboxWeb.Helpers.HTTP do
   def header_case(header) do
     header
     |> String.split("-")
-    |> Enum.map(&String.capitalize/1)
-    |> Enum.join("-")
+    |> Enum.map_join("-", &String.capitalize/1)
   end
 
   defp _content_type_from_mime(mime_type), do: List.last(String.split(mime_type, "/"))

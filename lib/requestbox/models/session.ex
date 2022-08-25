@@ -33,9 +33,9 @@ defmodule Requestbox.Session do
   end
 
   def find_session(id) do
-    with nil <- get_from_hashid(id),
-         nil <- get_from_vanity(id),
-         do: nil
+    with nil <- get_from_hashid(id) do
+      get_from_vanity(id)
+    end
   end
 
   defp get_from_hashid(id) do
