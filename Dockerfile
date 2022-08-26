@@ -1,13 +1,15 @@
-FROM elixir:alpine as base
+FROM elixir:slim as base
 ARG MIX_ENV=prod
 ENV MIX_ENV=${MIX_ENV}
 ENV MIX_HOME /root/.mix
-RUN apk add --update postgresql-client
+ENV DEBIAN_NONINTERACTIVE=y
 
+RUN apt-get update
+RUN apt-get install -y postgresql-client
 
 FROM base as deps
 
-RUN apk add --update sqlite-dev build-base
+RUN apt-get install -y libsqlite3-dev build-essential
 
 WORKDIR /app
 
@@ -15,8 +17,10 @@ RUN mix local.rebar --force
 RUN mix local.hex --force
 
 ADD mix.exs mix.lock ./
-ADD config ./config
 RUN mix deps.get --only-prod
+
+RUN mkdir config
+COPY config/config.exs config/${MIX_ENV}.exs config/
 RUN mix deps.compile
 
 
@@ -43,19 +47,20 @@ WORKDIR /app
 
 COPY --from=deps /root/.mix /root/.mix/
 COPY --from=deps /app/mix.exs /app/mix.lock ./
-COPY --from=deps /app/config ./config/
 COPY --from=deps /app/_build/${MIX_ENV}/lib ./_build/${MIX_ENV}/lib/
 COPY --from=deps /app/deps ./deps/
+COPY --from=deps /app/config ./config/
 COPY --from=frontend /app/priv/static priv/static/
 
 ADD lib lib
-ADD rel rel
 RUN mix compile
 
+COPY config/runtime.exs config/
+ADD rel rel
 ADD priv/repo priv/repo
 RUN mix phx.digest
 
-RUN mix distillery.release --verbose
+RUN mix release
 
 
 FROM base as serve
@@ -63,12 +68,10 @@ FROM base as serve
 ENV PORT=80
 EXPOSE $PORT
 
-RUN apk update && \
-    apk add --no-cache \
-      bash
-
 WORKDIR /app
 COPY --from=build /app/_build/${MIX_ENV}/rel/requestbox ./
 
+ENV PHX_SERVER=true
+
 ENTRYPOINT ["/app/bin/requestbox"]
-CMD ["foreground"]
+CMD ["start"]

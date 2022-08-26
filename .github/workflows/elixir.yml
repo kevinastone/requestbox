@@ -29,10 +29,9 @@ jobs:
     if: github.ref == 'refs/heads/master'
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Deploy to Heroku
+    - uses: actions/checkout@v2
+    - uses: superfly/flyctl-actions/setup-flyctl@master
+    - name: Deploy to Fly
       env:
-        HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
-        HEROKU_APP_NAME: "enigmatic-stream-8949"
-        GITHUB_COMMIT: ${{ github.sha }}
-      run: git push --force https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git $GITHUB_COMMIT:master
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      run: flyctl deploy --remote-only
