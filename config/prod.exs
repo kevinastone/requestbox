@@ -22,6 +22,7 @@ config :requestbox, RequestboxWeb.Endpoint,
 config :logger, level: :info
 
 config :requestbox, Requestbox.Repo,
+  ssl: true,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
   pool_size: 10
