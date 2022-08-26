@@ -8,7 +8,7 @@ defmodule Requestbox.MixProject do
       elixir: "~> 1.8",
       elixirc_paths: elixirc_paths(Mix.env()),
       elixirc_options: [warnings_as_errors: false],
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      compilers: [:phoenix] ++ Mix.compilers(),
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -22,20 +22,6 @@ defmodule Requestbox.MixProject do
   def application do
     [
       mod: {Requestbox, []}
-      # applications: [
-      #   :cowboy,
-      #   :logger,
-      #   :quantum,
-      #   :timex,
-      #   :tzdata,
-      #   :gettext,
-      #   :phoenix,
-      #   :phoenix_html,
-      #   :phoenix_ecto,
-      #   :ecto,
-      #   :postgrex,
-      #   :sqlite_ecto2
-      # ]
     ]
   end
 
@@ -50,10 +36,11 @@ defmodule Requestbox.MixProject do
     [
       {:phoenix, "~> 1.5"},
       {:phoenix_html, "~> 2.13"},
-      {:ecto, "~> 2.2"},
-      {:phoenix_ecto, "~> 3.0"},
-      {:postgrex, "~> 0.13"},
-      {:sqlite_ecto2, "~> 2.3", only: [:dev, :test]},
+      {:ecto, "~> 3.0"},
+      {:ecto_sql, "~> 3.0"},
+      {:phoenix_ecto, "~> 4.0"},
+      {:postgrex, "~> 0.16"},
+      {:ecto_sqlite3, "~> 0.8", only: [:dev, :test]},
       {:gettext, "~> 0.11"},
       {:plug_cowboy, "~> 2.1"},
       {:plug, "~> 1.7"},
@@ -61,7 +48,6 @@ defmodule Requestbox.MixProject do
       {:jason, "~> 1.0"},
       {:maptu, "~> 1.0"},
       {:ok, "~> 2.3"},
-      {:timex_ecto, "~> 3.3"},
       {:timex, "~> 3.5"},
       {:hashids, "~> 2.0"},
       {:numerator, "~> 0.2.0"},

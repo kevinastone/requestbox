@@ -3,8 +3,7 @@ defmodule Requestbox.ReleaseTasks do
     :crypto,
     :ssl,
     :postgrex,
-    :ecto
-    # :ecto_sql # If using Ecto 3.0 or higher
+    :ecto_sql # If using Ecto 3.0 or higher
   ]
 
   @repos Application.compile_env(:requestbox, :ecto_repos, [])

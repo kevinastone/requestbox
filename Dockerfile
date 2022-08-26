@@ -20,7 +20,7 @@ RUN mix deps.get --only-prod
 RUN mix deps.compile
 
 
-FROM node:alpine as frontend
+FROM node:lts-alpine as frontend
 
 WORKDIR /app
 
@@ -61,7 +61,7 @@ RUN mix distillery.release --verbose
 FROM base as serve
 
 ENV PORT=80
-EXPOSE 80
+EXPOSE $PORT
 
 RUN apk update && \
     apk add --no-cache \
