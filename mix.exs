@@ -36,7 +36,6 @@ defmodule Requestbox.MixProject do
     [
       {:phoenix, "~> 1.5"},
       {:phoenix_html, "~> 2.13"},
-      {:ecto, "~> 3.0"},
       {:ecto_sql, "~> 3.0"},
       {:phoenix_ecto, "~> 4.0"},
       {:postgrex, "~> 0.16"},

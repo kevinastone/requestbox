@@ -24,10 +24,6 @@ config :logger, :console,
 
 config :hashids, salt: "DtALrFb9ZQAghcOrxeE1azn6y5kf3OuZ"
 
-# Import environment specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
-import_config "#{Mix.env()}.exs"
-
 # Configure phoenix generators
 config :phoenix, :generators,
   migration: true,
@@ -36,3 +32,7 @@ config :phoenix, :generators,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 config :phoenix, :format_encoders, json: Jason
+
+# Import environment specific config. This must remain at the bottom
+# of this file so it overrides the configuration defined above.
+import_config "#{config_env()}.exs"

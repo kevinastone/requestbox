@@ -21,11 +21,15 @@ config :requestbox, RequestboxWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+maybe_ipv6 = if System.get_env("ECTO_IPV6"), do: [:inet6], else: []
+use_ssl = if System.get_env("ECTO_SSL"), do: true, else: false
+
 config :requestbox, Requestbox.Repo,
-  ssl: true,
+  ssl: use_ssl,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
-  pool_size: 10
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  socket_options: maybe_ipv6
 
 config :phoenix, :serve_endpoints, true
 
